@@ -1,0 +1,561 @@
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">
+                                <b><?php foreach ($_SESSION['submenus'] as $menu) { ?>
+                                        <?php if ($this->_controlador == $menu['v_link']) {
+                                            echo $menu['v_descripcion'];
+                                        } else {
+                                            '';
+                                        } ?>
+                                    <?php } ?>
+                                </b>
+                            </h2>
+                            <h2>&nbsp;&nbsp;"<b><?php echo $this->puesto ?>"</b></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <section class="col-lg-7">
+                    <div class="card col-12">
+                        <div class="card-header">
+                            <h4 class="card-title">Datos para adapatacion y publicación del puestos requerido</h4>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label font-weight-bolder">Código publicación:</label>
+                                    <input type="text" id="codigo" class="form-control" autocomplete="off" value="<?php echo $this->publicado[0]['v_codigo'] ?>" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label font-weight-bolder">Título del aviso:</label>
+                                    <input type="text" id="titulo" class="form-control" value="<?php echo $this->publicado[0]['v_titulo'] ?>" placeholder="Ejm: Ingeniero, Arquitecto,..." autocomplete="off" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label font-weight-bolder">Complemento al título:</label>
+                                    <input type="text" id="complemento" class="form-control" value="<?php echo $this->publicado[0]['v_complemento'] ?>" placeholder="Ejm: Turno de noche, con experiencia, ingles..." autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label font-weight-bolder">Breve descripción del puesto:</label>
+                                    <textarea id="mision" data-length="1200" maxlength="1200" class="form-control char-textarea-mision" rows="6" autocomplete="off" placeholder="escribir breve descripción..."><?php echo $this->publicado[0]['v_descripcion_puesto'] ?></textarea>
+                                    <small class="textarea-counter-value float-right"><span class="char-count-mision"><?php if ($this->publicado[0]['i_descripcion_len'] == 0) {
+                                                                                                                            echo 0;
+                                                                                                                        } else {
+                                                                                                                            echo $this->publicado[0]['i_descripcion_len'];
+                                                                                                                        }; ?></span></span> / 1200 </small>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12 col-12">
+                                            <div class="form-group">
+                                                <button id="btntareas" type="button" class="btn btn-warning">
+                                                    <i data-feather='plus'></i><span>&nbsp;&nbsp;Agregar tareas</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-12">
+                                            <table id="example1" class="table table-striped table-bordered table-condensed">
+                                                <thead class="thead-dark">
+                                                    <tr class="text-center">
+                                                        <th>#</th>
+                                                        <th>Tarea</th>
+                                                        <th># Editar</th>
+                                                        <th># Eliminar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbtareas">
+                                                    <?php if (isset($this->pubtarea)) { ?>
+                                                        <?php foreach ($this->pubtarea as $tr) { ?>
+                                                            <tr>
+                                                                <td class="text-center"><?php echo $tr['i_id'] ?></td>
+                                                                <td class="text-left"><?php echo $tr['v_tarea'] ?></td>
+                                                                <td class='text-center'>
+                                                                    <a id="<?php echo $tr['i_id'] ?>" class="btn btn-warning btn-sm update_tarea text-white">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </a>
+                                                                </td>
+                                                                <td class='text-center'>
+                                                                    <a id="<?php echo $tr['i_id'] ?>" class="btn btn-danger btn-sm delete_tarea text-white">
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        <?php } ?>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label font-weight-bolder">País:</label>
+                                    <select id="pais" class="select2 form-control form-control-lg">
+                                        <?php echo $this->pais ?>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label font-weight-bolder">Departamento:</label>
+                                    <select id="departamento" class="select2 form-control form-control-lg">
+                                        <?php echo $this->departamento ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label font-weight-bolder">Provincia:</label>
+                                    <select id="provincia" class="select2 form-control form-control-lg">
+                                        <?php echo $this->provincia ?>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label font-weight-bolder">Distrito:</label>
+                                    <select id="distrito" class="select2 form-control form-control-lg">
+                                        <?php echo $this->distrito ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label font-weight-bolder">Jornada laboral:</label>
+                                    <select id="jornada" class="form-control form-control-sl">
+                                        <option <?php if ($this->publicado[0]['i_jornada'] == 1) {
+                                                    echo "selected='selected'";
+                                                } else {
+                                                    echo "";
+                                                } ?> value=1>FULL TIME</option>
+                                        <option <?php if ($this->publicado[0]['i_jornada'] == 2) {
+                                                    echo "selected='selected'";
+                                                } else {
+                                                    echo "";
+                                                } ?> value=2>PART TIME</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-8">
+                                    <label class="form-label font-weight-bolder">Tipo de contrato:</label>
+                                    <select id="contrato" class="select2 form-control form-control-lg">
+                                        <?php echo $this->tipocontrato ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="salario1" class="form-label font-weight-bolder">Salario mensual:</label>
+                                    <input type="text" id="salario1" class="form-control numeral-mask" value="<?php echo $this->publicado[0]['v_salario1'] ?>" placeholder="Ejm: desde 5,000" autocomplete="off" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="salario2" class="form-label font-weight-bolder">*</label>
+                                    <input type="text" id="salario2" class="form-control numeral-mask1" value="<?php echo $this->publicado[0]['v_salario2'] ?>" placeholder="Ejm: hasta 8,000" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="mostrarsal" <?php if ($this->publicado[0]['v_mostrar_salario'] == true) {
+                                                                                                                echo 'checked';
+                                                                                                            } else {
+                                                                                                                '';
+                                                                                                            } ?> />
+                                        <label class="custom-control-label" for="mostrarsal">mostrar el salario en el aviso</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label font-weight-bolder">Fecha de inicio (Publicación):</label>
+                                    <input type="text" id="fecha" class="form-control flatpickr-disabled-range" value="<?php echo $this->publicado[0]['d_fecha'] ?>" placeholder="YYYY-MM-DD" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label font-weight-bolder">Cantidad de vacantes:</label>
+                                    <input type="text" id="vacantes" class="form-control validanumericos" value="<?php echo $this->publicado[0]['i_vacantes'] ?>" placeholder="# vacantes" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="form-label font-weight-bolder">Años de experiencia similar:</label>
+                                    <input type="text" id="experiencia" class="form-control" value="<?php echo $this->publicado[0]['i_experiencia'] ?>" placeholder="# años" onkeypress="return valideKey(event);" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="form-label font-weight-bolder">Edad mínima:</label>
+                                    <input type="text" id="edad-min" class="form-control" value="<?php echo $this->publicado[0]['i_edad_min'] ?>" placeholder="# edad mínima" onkeypress="return valideKey(event);" autocomplete="off" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="form-label font-weight-bolder">Edad máxima:</label>
+                                    <input type="text" id="edad-max" class="form-control" value="<?php echo $this->publicado[0]['i_edad_max'] ?>" placeholder="# edad máxima" onkeypress="return valideKey(event);" autocomplete="off" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="mostraredad" <?php if ($this->publicado[0]['v_mostrar_edad'] == true) {
+                                                                                                                    echo 'checked';
+                                                                                                                } else {
+                                                                                                                    '';
+                                                                                                                } ?> />
+                                        <label class="custom-control-label" for="mostraredad">mostrar edades en el aviso</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label font-weight-bolder">Estudios mínimos:</label>
+                                    <select id="estudios" class="form-control form-control-sl">
+                                        <option <?php if ($this->publicado[0]['i_estudios'] == 1) {
+                                                    echo "selected='selected'";
+                                                } else {
+                                                    echo "";
+                                                } ?> value=1>EDUCACION SECUNDARIA</option>
+                                        <option <?php if ($this->publicado[0]['i_estudios'] == 2) {
+                                                    echo "selected='selected'";
+                                                } else {
+                                                    echo "";
+                                                } ?> value=2>TÉCNICO</option>
+                                        <option <?php if ($this->publicado[0]['i_estudios'] == 3) {
+                                                    echo "selected='selected'";
+                                                } else {
+                                                    echo "";
+                                                } ?> value=3>UNIVERSITARIO</option>
+                                        <option <?php if ($this->publicado[0]['i_estudios'] == 4) {
+                                                    echo "selected='selected'";
+                                                } else {
+                                                    echo "";
+                                                } ?> value=4>POST GRADO</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12 col-12">
+                                            <div class="form-group">
+                                                <button id="btnperfil" type="button" class="btn btn-warning">
+                                                    <i data-feather='plus'></i><span>&nbsp;&nbsp;Agregar perfil</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-12">
+                                            <table id="example2" class="table table-striped table-bordered table-condensed">
+                                                <thead class="thead-dark">
+                                                    <tr class="text-center">
+                                                        <th>#</th>
+                                                        <th>Perfil</th>
+                                                        <th># Editar</th>
+                                                        <th># Eliminar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tablita-pri">
+                                                    <?php if (isset($this->pubperfil)) { ?>
+                                                        <?php foreach ($this->pubperfil as $tr) { ?>
+                                                            <tr>
+                                                                <td class="text-center"><?php echo $tr['i_id'] ?></td>
+                                                                <td class="text-left"><?php echo $tr['v_perfil'] ?></td>
+                                                                <td class='text-center'>
+                                                                    <a id="<?php echo $tr['i_id'] ?>" class="btn btn-warning btn-sm update_perfil text-white">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </a>
+                                                                </td>
+                                                                <td class='text-center'>
+                                                                    <a id="<?php echo $tr['i_id'] ?>" class="btn btn-danger btn-sm delete_perfil text-white">
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        <?php } ?>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label class="form-label font-weight-bolder">Disponibilidad para viajar:</label>
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="rdviajar1" name="viajar" <?php if ($this->publicado[0]['v_rdviaje1'] == true) {
+                                                                                                                            echo 'checked';
+                                                                                                                        } else {
+                                                                                                                            '';
+                                                                                                                        } ?> />
+                                        <label class="custom-control-label" for="rdviajar1">Si</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="rdviajar2" name="viajar" <?php if ($this->publicado[0]['v_rdviaje2'] == true) {
+                                                                                                                            echo 'checked';
+                                                                                                                        } else {
+                                                                                                                            '';
+                                                                                                                        } ?> />
+                                        <label class="custom-control-label" for="rdviajar2">No</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label class="form-label font-weight-bolder">Disponibilidad para cambiar de residencia:</label>
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="rdresidencia1" name="residencia" <?php if ($this->publicado[0]['v_rdresidencia1'] == true) {
+                                                                                                                                    echo 'checked';
+                                                                                                                                } else {
+                                                                                                                                    '';
+                                                                                                                                } ?> />
+                                        <label class="custom-control-label" for="rdresidencia1">Si</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="rdresidencia2" name="residencia" <?php if ($this->publicado[0]['v_rdresidencia2'] == true) {
+                                                                                                                                    echo 'checked';
+                                                                                                                                } else {
+                                                                                                                                    '';
+                                                                                                                                } ?> />
+                                        <label class="custom-control-label" for="rdresidencia2">No</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label class="form-label font-weight-bolder">Personas con discapacidad:</label>
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="discapacidad1" name="discapacidad" <?php if ($this->publicado[0]['v_rddiscapacidad1'] == true) {
+                                                                                                                                    echo 'checked';
+                                                                                                                                } else {
+                                                                                                                                    '';
+                                                                                                                                } ?> />
+                                        <label class="custom-control-label" for="discapacidad1">Si</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="discapacidad2" name="discapacidad" <?php if ($this->publicado[0]['v_rddiscapacidad2'] == true) {
+                                                                                                                                    echo 'checked';
+                                                                                                                                } else {
+                                                                                                                                    '';
+                                                                                                                                } ?> />
+                                        <label class="custom-control-label" for="discapacidad2">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <button id="btnregistrar" type="button" class="btn btn-secondary"><i data-feather='save'></i><span>&nbsp;&nbsp;Actualizar</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <!-- MODALES PARA PRINCIPALES TAREA (INICIO) -->
+    <!-- MODAL AGREGAR DATOS -->
+    <div class="modal fade" id="modal-agregar" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">AGREGAR TAREA</h5>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="form-label font-weight-bolder">Tarea:</label>
+                            <textarea class="form-control" id="tarea" tabindex="1" autofocus rows="5" placeholder="escribir tarea..." autocomplete="off"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button id="btnguardartarea" tabindex="3" type="button" class="btn btn-success btn-block"><b>Aceptar</b></button>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-sm-6">
+                                <button id="btncancelartarea" tabindex="4" type="button" class="btn btn-danger btn-block"><b>Cancelar</b></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ACTUALIZAR DATOS -->
+    <div class="modal fade" id="modal-agregar1" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ACTUALIZAR TAREA</h5>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="form-label font-weight-bolder">ID:</label>
+                            <input type="text" id="tareaid" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="form-label font-weight-bolder">Tarea:</label>
+                            <textarea class="form-control" id="tarea1" tabindex="1" autofocus rows="5" placeholder="escribir tarea..." autocomplete="off"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button id="btnguardartarea1" tabindex="3" type="button" class="btn btn-success btn-block"><b>Aceptar</b></button>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-sm-6">
+                                <button id="btncancelartarea1" tabindex="4" type="button" class="btn btn-danger btn-block"><b>Cancelar</b></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODALES PARA PRINCIPALES RESPONSABILIDADES (FIN) -->
+
+    <!-- MODALES PARA PERFIL (INICIO) -->
+    <!-- MODAL AGREGAR DATOS -->
+    <div class="modal fade" id="modal-agregar-pri" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">AGREGAR PERFIL</h5>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="form-label font-weight-bolder">Perfil:</label>
+                            <textarea class="form-control" id="perfil-pri" tabindex="1" autofocus rows="5" placeholder="escribir tarea..." autocomplete="off"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button id="btnguardar-pri" tabindex="5" type="button" class="btn btn-success btn-block"><b>Aceptar</b></button>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-sm-6">
+                                <button id="btncancelar-pri" tabindex="6" type="button" class="btn btn-danger btn-block"><b>Cancelar</b></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ACTUALIZAR DATOS -->
+    <div class="modal fade" id="modal-agregar-pri1" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ACTUALIZAR PERFIL</h5>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="form-label font-weight-bolder">ID:</label>
+                            <input type="text" id="perfilid" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="form-label font-weight-bolder">Perfil:</label>
+                            <textarea class="form-control" id="perfil-pri1" tabindex="1" autofocus rows="5" placeholder="escribir tarea..." autocomplete="off"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button id="btnguardar-pri1" tabindex="5" type="button" class="btn btn-success btn-block"><b>Aceptar</b></button>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-sm-6">
+                                <button id="btncancelar-pri1" tabindex="6" type="button" class="btn btn-danger btn-block"><b>Cancelar</b></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALES PARA PERFIL (FIN) -->

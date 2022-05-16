@@ -1,0 +1,156 @@
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">
+                                <b><?php foreach ($_SESSION['menus'] as $menu) { ?>
+                                        <?php if ($this->_controlador == $menu['v_link']) {
+                                            echo $menu['v_descripcion'];
+                                        } else {
+                                            '';
+                                        } ?>
+                                    <?php } ?>
+                                </b>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+
+                <!-- Input Sizing start -->
+                <section id="input-sizing">
+                    <div class="row match-height">
+                        <div class="col-md-4 col-12">
+                            <div class="card">
+                                <!-- <div class="card-header">
+                                    <h4 class="card-title">Sizing Options</h4>
+                                </div> -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Cargar o subida de Curriculum Vitae (CV.)</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                                La subida del archivo sera de la siguiente manera:
+                                            </p>
+                                            <p class="card-text">
+                                                * Curriculum Vitae <code>aceptamos</code> el archivo en <code>*.pdf</code>.
+                                            </p>
+                                            <p class="card-text">
+                                                De esta manera usted no debe sobrepasar el límite de 2097 kb en el archivo, teniendo como límite de subida
+                                                de 2 MB en total.
+                                            </p>
+                                            <label for="customFile">Buscar archivo a cargar...</label>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <div id="dv00" class="custom-file">
+                                                            <input id="archivo" type="file" class="custom-file-input" />
+                                                            <label id="nombre_inicio" class="custom-file-label" for="customFile">Ningun archivo seleccionado</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12">
+                                                    <button id="btnsubir" type="button" class="btn btn-warning">
+                                                        <i data-feather='save'></i><span>&nbsp;&nbsp;Cargar Archivo</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-12">
+                            <div class="card">
+                                <!-- <div class="card-header">
+                                    <h4 class="card-title">Horizontal form label sizing</h4>
+                                </div> -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12 col-12">
+                                            <table id="example1" class="table table-bordered">
+                                                <thead class="thead-dark">
+                                                    <tr class="text-center">
+                                                        <th>Id</th>
+                                                        <th>Nombre Archivo</th>
+                                                        <th>Fecha y hora</th>
+                                                        <th>Tamaño</th>
+                                                        <th>#</th>
+                                                        <th>#</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tablita-imp" class="text-center">
+                                                    <?php if (isset($this->consultacv)) { ?>
+                                                        <?php foreach ($this->consultacv as $cv) { ?>
+                                                            <tr>
+                                                                <td><?php echo $cv['id'] ?></td>
+                                                                <td><?php echo $cv['v_nombre'] ?></td>
+                                                                <td><?php echo $cv['v_fecha'] ?></td>
+                                                                <td><?php echo $cv['v_size'] ?></td>
+                                                                <td>
+                                                                    <a class="btn btn-danger btn-sm" target="_blank" style="color:white" href="<?php echo BASE_URL . $cv['v_ruta'] ?>">
+                                                                        <i class="fas fa-<?php echo $cv['v_icon'] ?>"></i>
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <a id='<?php echo $cv['id'] ?>' name="<?php echo $cv['v_nombre'] ?>" class='btn btn-danger btn-sm text-white eliminar'>
+                                                                        <i class='fa fa-trash-alt'></i>
+                                                                        <span>&nbsp;&nbsp;Eliminar</span>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        <?php } ?>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Input Sizing end -->
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <!-- MODAL ELIMINAR DATO-->
+    <div class="modal fade" id="modal-eliminar" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ELIMINAR TAREA: </h5><b><span id="cod_eliminar"></span></b>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button id="btn_si_eliminar" type="button" class="btn btn-success btn-block"><b>Aceptar</b></button>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-sm-6">
+                                <button id="btn_no_eliminar" type="button" class="btn btn-danger btn-block"><b>Cancelar</b></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODALES PARA PRINCIPALES RESPONSABILIDADES (FIN) -->

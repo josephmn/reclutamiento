@@ -1,0 +1,647 @@
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">
+                                <b><?php foreach ($_SESSION['submenus'] as $menu) { ?>
+                                        <?php if ($this->_controlador == $menu['v_link']) {
+                                            echo $menu['v_descripcion'];
+                                        } else {
+                                            '';
+                                        } ?>
+                                    <?php } ?>
+                                </b>
+                            </h2>
+                            <h2>&nbsp;&nbsp;"<b><?php echo $this->puesto ?>"</b></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <section class="col-lg-6">
+                    <div class="card col-12">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- form-group -->
+                                <div class="col-xs-12 col-sm-5 col-12">
+                                    <button id="btncategoria" type="button" class="btn btn-success btn-block font-weight-bolder" style="color: White;">
+                                        <i class="fas fa-globe-americas"></i><span>&nbsp;&nbsp;Nueva categoría</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card col-12">
+                        <div class="card-body">
+                            <div class="row">
+                                <li>
+                                    <label class="form-label font-weight-bolder">Carta de color <code class="text-warning"></b>AMARILLO</b></code> es que el correo se envio correctamente o que ya existe un envio de correo anterior.</label>
+                                </li>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-12">
+                                    <table id="example1" class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr class="text-center">
+                                                <th>Control</th>
+                                                <th>Puesto</th>
+                                                <th>Postulante</th>
+                                                <th>Finalista</th>
+                                                <th>CV (*.pdf)</th>
+                                                <th>#</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (isset($this->entrevistadetalle)) { ?>
+                                                <?php foreach ($this->entrevistadetalle as $et) { ?>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <a id="<?php echo $et['i_id'] ?>" vtitulo="<?php echo $et['v_titulo'] ?>" vpublicacion="<?php echo $et['v_publicacion'] ?>" ipostulante="<?php echo $et['i_postulante'] ?>" class="btn btn-warning btn-sm control" style="color: black;">
+                                                                <i class="fas fa-user-edit"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td class="text-left"><?php echo $et['v_titulo'] ?></td>
+                                                        <td class="text-left"><?php echo $et['v_postulante'] ?></td>
+                                                        <td class="text-center"><span class="badge bg-primary"><?php echo $et['v_finalista'] ?></span></td>
+                                                        <td class="text-center">
+                                                            <a class="btn btn-danger btn-sm" target="_blank" href="<?php echo BASE_URL . $et['v_ruta'] ?>">
+                                                                <i class="fas fa-file-pdf"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td class='text-center'>
+                                                            <a id="<?php echo $et['i_postulante'] ?>" vpospub="<?php echo $et['v_publicacion'] ?>" idd="<?php echo $et['i_id'] ?>" vpuesto="<?php echo $et['v_titulo'] ?>" style="display: <?php if ($et['v_finalista'] == "Si") {
+                                                                                                                                                                                                                                                echo "none";
+                                                                                                                                                                                                                                            } else {
+                                                                                                                                                                                                                                                echo "compact";
+                                                                                                                                                                                                                                            } ?>" href="#" class="btn btn-<?php echo $et['v_correo_enviado'] ?> btn-sm correo" style="color:white">
+                                                                <i class="fas fa-envelope"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div id='calendar' class="col-xs-12 col-sm-12 col-12">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+    </div>
+    <!-- END: Content-->
+
+    <!-- MODAL NUEVA CATEGORÍA -->
+    <div class="modal fade" id="modal-categoria" data-backdrop="static" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class='fa fa-calendar-check'></i><b>&nbsp;CATEGORÍA</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-categoria" data-toggle="pill" href="#categoria" aria-expanded="true"><i class="fas fa-calendar"></i> Categoría</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" id="home-categoria-editar" data-toggle="pill" href="#categoria-editar" aria-expanded="false"><i class="fas fa-calendar-check"></i> Editar categoría</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" id="categoria" class="tab-pane active" aria-labelledby="home-categoria" aria-expanded="true">
+                            <div class="col-xs-12 col-sm-12 col-12">
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label font-weight-bolder">Nombre categoría:</label>
+                                        <input type="text" id="cita-categoria" class="form-control" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label font-weight-bolder">Color:</label>
+                                        <div class="input-group ql-color-picker">
+                                            <input type="color" id="cita-color" class="form-control" value="#61C250">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-6">
+                                        <button id="btnguardarcategoria" type="button" class="btn btn-warning btn-block">
+                                            <i class="fas fa-save"></i>
+                                            <b>&nbsp;Guardar</b></button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                                        <table id="example2" class="table table-bordered">
+                                            <thead class="thead-dark">
+                                                <tr class="text-center">
+                                                    <th>Id</th>
+                                                    <th>Categoria</th>
+                                                    <th>Color</th>
+                                                    <th>#</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php if (isset($this->calendariocat)) { ?>
+                                                    <?php foreach ($this->calendariocat as $nt) { ?>
+                                                        <tr>
+                                                            <td class="text-center"><?php echo $nt['i_id'] ?></td>
+                                                            <td class="text-left"><?php echo $nt['v_categoria'] ?></td>
+                                                            <td class="text-center font-weight-bolder" style="color: <?php echo $nt['v_color'] ?>;">
+                                                                <i class="fas fa-square "></i>&nbsp;<?php echo $nt['v_color'] ?>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <a id="<?php echo $nt['i_id'] ?>" cate="<?php echo $nt['v_categoria'] ?>" colo="<?php echo $nt['v_color'] ?>" class="btn btn-warning btn-sm editar-cat" style="color: black">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div role="tabpanel" id="categoria-editar" class="tab-pane" aria-labelledby="home-categoria-editar" aria-expanded="false">
+                            <div class="col-xs-12 col-sm-12 col-12">
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label font-weight-bolder">Id categoría:</label>
+                                        <input type="text" id="ecita-id" class="form-control" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label font-weight-bolder">Nombre categoría:</label>
+                                        <input type="text" id="ecita-categoria" class="form-control" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label font-weight-bolder">Color:</label>
+                                        <div class="input-group ql-color-picker">
+                                            <input type="color" id="ecita-color" class="form-control" value="#61C250">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-6">
+                                        <button id="btnactualizarcategoria" type="button" class="btn btn-warning btn-block">
+                                            <i class="fas fa-save"></i>
+                                            <b>&nbsp;Guardar cambios</b></button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CONTROL AL POSTULANTE-->
+    <div class="modal fade" id="modal-control" data-backdrop="static" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class='fa fa-user-edit'></i><b>&nbsp;CONTROL AL POSTULANTE</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link notas active" id="home-notas" data-toggle="pill" href="#notas" aria-expanded="true"><i class="fas fa-sticky-note"></i> Notas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link seguimiento" id="home-seguimiento" data-toggle="pill" href="#seguimiento" aria-expanded="false"><i class="fas fa-list"></i> Seguimiento</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link agenda" id="home-agenda" data-toggle="pill" href="#agenda" aria-expanded="false"><i class="fas fa-calendar-day"></i> Agenda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link resultado" id="home-resultado" data-toggle="pill" href="#resultado" aria-expanded="false"><i class="fas fa-award"></i> Resultado</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link archivo" id="home-archivo" data-toggle="pill" href="#archivo" aria-expanded="false"><i class="fas fa-file-archive"></i> Archivo</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" id="notas" class="tab-pane active" aria-labelledby="home-notas" aria-expanded="true">
+                            <div class="col-xs-12 col-sm-12 col-12">
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="form-label font-weight-bolder">Código postulación:</label>
+                                        <input type="text" id="postulacion" class="form-control" autocomplete="off" />
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <label class="form-label font-weight-bolder">Puesto:</label>
+                                        <input type="text" id="puesto" class="form-control" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="form-label font-weight-bolder">Código postulante:</label>
+                                        <input type="text" id="codigo" class="form-control" autocomplete="off" />
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <label class="form-label font-weight-bolder">Nombre del postulante:</label>
+                                        <input type="text" id="postulante" class="form-control" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <!-- <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label font-weight-bolder">Escribir breve nota:</label>
+                                        <textarea id="nota" class="form-control" maxlength="300" onpaste="caracteres_mision();" onkeyup="caracteres_mision();" rows="3" placeholder="escribir nota..." autocomplete="off"></textarea>
+                                        <div class="text" id="res">
+                                            <small><b>0 caractere/s, te quedan 300</b></small>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label font-weight-bolder">Escribir breve nota:</label>
+                                        <textarea id="nota" data-length="300" maxlength="300" class="form-control char-textarea-nota" rows="3" autocomplete="off" placeholder="escribir nota..."></textarea>
+                                        <small class="textarea-counter-value float-right"><span class="char-count-nota">0</span> / 300 </small>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                        <button id="btnguardar1" type="button" class="btn btn-success btn-block">
+                                            <i class="fas fa-save"></i>
+                                            <b>&nbsp;Guardar nota</b></button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                                        <table id="example3" class="table table-bordered">
+                                            <thead class="thead-dark">
+                                                <tr class="text-center">
+                                                    <th>Id</th>
+                                                    <th>Nota</th>
+                                                    <th>Fecha</th>
+                                                    <th>#</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tablita-pri">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" id="seguimiento" class="tab-pane" aria-labelledby="home-seguimiento" aria-expanded="false">
+                            <div id="div-00"></div>
+                        </div>
+                        <div role="tabpanel" id="agenda" class="tab-pane" aria-labelledby="home-agenda" aria-expanded="false">
+                            <div class="col-xs-12 col-sm-12 col-12">
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="form-label font-weight-bolder">Código postulación:</label>
+                                        <input type="text" id="dpostulacion" class="form-control" autocomplete="off" />
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <label class="form-label font-weight-bolder">Puesto:</label>
+                                        <input type="text" id="dpuesto" class="form-control" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="form-label font-weight-bolder">Código postulante:</label>
+                                        <input type="text" id="dcodigo" class="form-control" autocomplete="off" />
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <label class="form-label font-weight-bolder">Nombre del postulante:</label>
+                                        <input type="text" id="dpostulante" class="form-control" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label font-weight-bolder">Categoría:</label>
+                                        <select id="dcategoria" class="select2 form-control form-control-lg">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label for="dfechainicio" class="font-weight-bolder">Fecha y hora [inicio]:</label>
+                                        <input type="text" id="dfechainicio" class="form-control flatpickr-disable-date-time" placeholder="YYYY-MM-DD hh:mm" />
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label for="dfechafin" class="font-weight-bolder">Fecha y hora [fin]:</label>
+                                        <input type="text" id="dfechafin" class="form-control flatpickr-disable-date-time" placeholder="YYYY-MM-DD hh:mm" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                        <button id="btnguardar2" type="button" class="btn btn-success btn-block">
+                                            <i class="fas fa-save"></i>
+                                            <b>&nbsp;Guardar cita</b></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" id="resultado" class="tab-pane" aria-labelledby="home-resultado" aria-expanded="false">
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label font-weight-bolder">Breve descripción del finalista:</label>
+                                    <textarea id="mision" data-length="1200" maxlength="1200" class="form-control char-textarea-mision" rows="6" autocomplete="off" placeholder="escribir breve descripción..."></textarea>
+                                    <small class="textarea-counter-value float-right"><span class="char-count-mision">0</span> / 1200 </small>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                    <button id="btnfinalistaA" type="button" class="btn btn-success btn-block">
+                                        <i class="fas fa-save"></i>
+                                        <b>&nbsp;Finalista</b></button>
+                                </div>
+                                <br>
+                                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                    <button id="btnfinalistaB" type="button" class="btn btn-danger btn-block">
+                                        <i class="fas fa-ban"></i>
+                                        <b>&nbsp;Anular</b></button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" id="archivo" class="tab-pane" aria-labelledby="home-archivo" aria-expanded="false">
+                            <div class="col-xs-12 col-sm-12 col-12">
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="form-label font-weight-bolder">Código postulación:</label>
+                                        <input type="text" id="xpostulacion" class="form-control" autocomplete="off" />
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <label class="form-label font-weight-bolder">Puesto:</label>
+                                        <input type="text" id="xpuesto" class="form-control" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="form-label font-weight-bolder">Código postulante:</label>
+                                        <input type="text" id="xcodigo" class="form-control" autocomplete="off" />
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <label class="form-label font-weight-bolder">Nombre del postulante:</label>
+                                        <input type="text" id="xpostulante" class="form-control" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <!-- <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <p>Cargar archivo (peso max. por archivo 2MB)</p>
+                                            <div class="input-group">
+                                                <div id="divfile" class="custom-file">
+                                                    <input type="file" id="documento" name="documento" class="custom-file-input">
+                                                    <label class="custom-file-label" for="exampleInputFile">Cargar archivo...</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <br>
+                                <div class="row">
+                                    <div class="form-group col-sm-12">
+                                        <div class="input-group">
+                                            <div class="input-group">
+                                                <input id="documento" name="documento" type="file">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label font-weight-bolder">Escribir descripcion de archivo a subir:</label>
+                                        <textarea id="xdescripcion" data-length="50" maxlength="50" class="form-control char-textarea-subir" rows="2" autocomplete="off" placeholder="escribir breve descripción..."></textarea>
+                                        <small class="textarea-counter-value float-right"><span class="char-count-subir">0</span> / 50 </small>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                        <button id="btnguardar" class="btn btn-success btn-block"><b>Guardar</b></button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                                        <table id="example4" class="table table-bordered">
+                                            <thead class="thead-dark">
+                                                <tr class="text-center">
+                                                    <th>Id</th>
+                                                    <th>Descripcion</th>
+                                                    <th>Archivo</th>
+                                                    <th>Fecha</th>
+                                                    <th>#</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tablita-arc">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL REVISAR CITA-->
+    <div class="modal fade" id="modal-cita" data-backdrop="static" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class='fa fa-calendar-check'></i><b>&nbsp;CITA PROGRAMADA: # <span id="idcita"></b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-12">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="form-label font-weight-bolder">Código postulación:</label>
+                                    <input type="text" id="upostulacion" class="form-control" autocomplete="off" />
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <label class="form-label font-weight-bolder">Puesto:</label>
+                                    <input type="text" id="upuesto" class="form-control" autocomplete="off" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="form-label font-weight-bolder">Código postulante:</label>
+                                    <input type="text" id="ucodigo" class="form-control" autocomplete="off" />
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <label class="form-label font-weight-bolder">Nombre del postulante:</label>
+                                    <input type="text" id="upostulante" class="form-control" autocomplete="off" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label font-weight-bolder">Categoría:</label>
+                                    <select id="ucategoria" class="select2 form-control form-control-lg">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="dfechainicio" class="font-weight-bolder">Fecha y hora [inicio]:</label>
+                                    <input type="text" id="ufechainicio" class="form-control flatpickr-disable-date-time" placeholder="YYYY-MM-DD hh:mm" />
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="dfechafin" class="font-weight-bolder">Fecha y hora [fin]:</label>
+                                    <input type="text" id="ufechafin" class="form-control flatpickr-disable-date-time" placeholder="YYYY-MM-DD hh:mm" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-12 col-md-6">
+                                    <button id="btnguardar3" type="button" class="btn btn-success btn-block">
+                                        <i class="fas fa-save"></i>
+                                        <b>&nbsp;Guardar</b>
+                                    </button>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-12 col-md-6">
+                                    <button id="btnguardar4" type="button" class="btn btn-danger btn-block">
+                                        <i class="fas fa-save"></i>
+                                        <b>&nbsp;Eliminar</b>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ENVIAR CORREO-->
+    <div class="modal fade" id="modal-correo" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ENVIAR CORREO:&nbsp;</h5><b><span id="postnombre"></span></b>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="form-label font-weight-bolder">Publicación:</label>
+                            <input type="text" id="pospublicacion" class="form-control" autocomplete="off" />
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="form-label font-weight-bolder">ID:</label>
+                            <input type="text" id="posid" class="form-control" autocomplete="off" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="form-label font-weight-bolder">Para:</label>
+                            <input type="text" id="postpara" class="form-control" autocomplete="off" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="form-label font-weight-bolder">CC:</label>
+                            <select id="postcc" class="select2 form-control jscorreocc" multiple>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="form-label font-weight-bolder">Asunto:</label>
+                            <input type="text" id="postasunto" class="form-control" autocomplete="off" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="form-label font-weight-bolder">Mensaje:</label>
+                            <textarea id="mensaje" data-length="1200" maxlength="1200" class="form-control char-textarea-mision" rows="14" autocomplete="off" placeholder="escribir breve mensaje..."></textarea>
+                            <small class="textarea-counter-value float-right"><span class="char-count-mision"><span id="valorx"></span></span>/ 1200 </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button id="btnenviarcorreo" type="button" class="btn btn-success btn-block">
+                                    <i class="fas fa-paper-plane"></i>
+                                    <b>Enviar</b>
+                                </button>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-sm-6">
+                                <button id="btncancelarcorreo" type="button" class="btn btn-danger btn-block">
+                                    <i class="fas fa-ban"></i>
+                                    <b>Cancelar</b></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

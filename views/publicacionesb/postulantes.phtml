@@ -1,0 +1,477 @@
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">
+                                <b><?php foreach ($_SESSION['submenus'] as $menu) { ?>
+                                        <?php if ($this->_controlador == $menu['v_link']) {
+                                            echo $menu['v_descripcion'];
+                                        } else {
+                                            '';
+                                        } ?>
+                                    <?php } ?>
+                                </b>
+                            </h2>
+                            <h2>&nbsp;&nbsp;"<b><?php echo $this->puesto ?>"</b></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-8 col-sm-12 col-12">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h4 class="card-title text-white"><i class="fas fa-user-friends"></i>&nbsp;&nbsp;<b>POSTULANTES</b></h4>
+                        </div>
+                        <div class="card-body">
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-3 col-sm-3 col-12">
+                                    <button id="selectAll" type="button" class="btn btn-success btn-block"><i class="fas fa-check-square"></i>&nbsp;&nbsp;<b>Seleccionar / deseleccionar [todos]</b></button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-12">
+                                    <table id="example1" class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr class="text-center">
+                                                <th>#</th>
+                                                <th>Publicacion</th>
+                                                <th>Título</th>
+                                                <th>Postulante</th>
+                                                <th>Fecha</th>
+                                                <th>Hora</th>
+                                                <th>Estado</th>
+                                                <th>Documento (CV)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (isset($this->postulantes)) { ?>
+                                                <?php foreach ($this->postulantes as $tr) { ?>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="cbx1" value="<?php echo $tr['i_id'] ?>">
+                                                                <label class="form-check-label"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center"><?php echo $tr['v_publicacion'] ?></td>
+                                                        <td class="text-left"><?php echo $tr['v_titulo'] ?></td>
+                                                        <td class="text-left"><?php echo $tr['v_postulante'] ?></td>
+                                                        <td class="text-center"><?php echo $tr['d_fecha'] ?></td>
+                                                        <td class="text-center"><?php echo $tr['v_hora'] ?></td>
+                                                        <td class="text-center"><span class="badge bg-<?php echo $tr['v_estado_color'] ?>"><?php echo $tr['v_estado'] ?></span></td>
+                                                        <td class="text-center">
+                                                            <a class="btn btn-danger btn-sm" target="_blank" style="color:white" href="<?php echo BASE_URL . $tr['v_ruta'] ?>">
+                                                                <i class="fas fa-file-pdf"></i>&nbsp;&nbsp;pdf
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-3 col-sm-2 col-12">
+                                    <div class="form-group">
+                                        <button id="btnaprobar" type="button" class="btn btn-success btn-block"><i class="fas fa-user-check"></i>&nbsp;&nbsp;<b>Aprobar</b></button>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-sm-2 col-12">
+                                    <div class="form-group">
+                                        <button id="btndesaprobar" type="button" class="btn btn-danger btn-block"><i class="fas fa-user-times"></i>&nbsp;&nbsp;<b>Desaprobar</b></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-8 col-sm-6 col-12">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h4 class="card-title text-white"><i class="fas fa-user-check"></i>&nbsp;&nbsp;<b>POSTULANTES - APROBADOS</b></h4>
+                        </div>
+                        <div class="card-body">
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-12">
+                                    <button id="selectAllapro" type="button" class="btn btn-success btn-block">
+                                        <i class="fas fa-check-square"></i>&nbsp;&nbsp;<b>Seleccionar / deseleccionar [todos]</b>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-12">
+                                    <table id="example2" class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr class="text-center">
+                                                <th>#</th>
+                                                <th>Postulante</th>
+                                                <th>Fecha</th>
+                                                <th>Hora</th>
+                                                <th>Estado</th>
+                                                <th>CV (*.pdf)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (isset($this->aprobados)) { ?>
+                                                <?php foreach ($this->aprobados as $ap) { ?>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="cbx2" value="<?php echo $ap['i_id'] ?>">
+                                                                <label class="form-check-label"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-left"><?php echo $ap['v_postulante'] ?></td>
+                                                        <td class="text-center"><?php echo $ap['d_fecha'] ?></td>
+                                                        <td class="text-center"><?php echo $ap['v_hora'] ?></td>
+                                                        <td class="text-center"><span class="badge bg-<?php echo $ap['v_estado_color'] ?>"><?php echo $ap['v_estado'] ?></span></td>
+                                                        <td class="text-center">
+                                                            <a class="btn btn-danger btn-sm" target="_blank" style="color:white" href="<?php echo BASE_URL . $ap['v_ruta'] ?>">
+                                                                <i class="fas fa-file-pdf"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-3 col-12">
+                                    <div class="form-group">
+                                        <button id="btnenviocv" type="button" class="btn btn-secondary btn-block"><i class="fas fa-file-pdf"></i>&nbsp;&nbsp;<b>Enviar CV.</b></button>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-sm-3 col-12">
+                                    <div class="form-group">
+                                        <button id="btndesaprobar2" type="button" class="btn btn-danger btn-block"><i class="fas fa-user-times"></i>&nbsp;&nbsp;<b>Desaprobar</b></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-8 col-sm-6 col-12">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h4 class="card-title text-white"><i class="fas fa-user-times"></i>&nbsp;&nbsp;<b>POSTULANTES - DESAPROBADOS</b></h4>
+                        </div>
+                        <div class="card-body">
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-12">
+                                    <button id="selectAlldesapro" type="button" class="btn btn-success btn-block">
+                                        <i class="fas fa-check-square"></i>&nbsp;&nbsp;<b>Seleccionar / deseleccionar [todos]</b>
+                                    </button>
+                                </div>
+                                <!-- <br>
+                                <br>
+                                <div class="col-xs-6 col-sm-6 col-12">
+                                    <button id="enviocorreodesapro" type="button" class="btn btn-warning btn-block">
+                                        <i class="fas fa-envelope"></i>&nbsp;&nbsp;<b>Enviar correo a seleccionado(s)</b>
+                                    </button>
+                                </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-12">
+                                    <table id="example3" class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr class="text-center">
+                                                <th>#</th>
+                                                <th>Postulante</th>
+                                                <th>Fecha</th>
+                                                <th>Hora</th>
+                                                <th>Estado</th>
+                                                <th>CV (*.pdf)</th>
+                                                <!-- <th>Correo</th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (isset($this->desaprobados)) { ?>
+                                                <?php foreach ($this->desaprobados as $dp) { ?>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="cbx3" value="<?php echo $dp['i_id'] ?>">
+                                                                <label class="form-check-label"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-left"><?php echo $dp['v_postulante'] ?></td>
+                                                        <td class="text-center"><?php echo $dp['d_fecha'] ?></td>
+                                                        <td class="text-center"><?php echo $dp['v_hora'] ?></td>
+                                                        <td class="text-center"><span class="badge bg-<?php echo $dp['v_estado_color'] ?>"><?php echo $dp['v_estado'] ?></span></td>
+                                                        <td class="text-center">
+                                                            <a class="btn btn-danger btn-sm" target="_blank" style="color:white" href="<?php echo BASE_URL . $dp['v_ruta'] ?>">
+                                                                <i class="fas fa-file-pdf"></i>
+                                                            </a>
+                                                        </td>
+                                                        <!-- <td class="text-center">
+                                                            <a id="<?php //echo $dp['i_id'] ?>" class="btn btn-warning btn-sm email" href="#" style="color:white">
+                                                                <i class="fas fa-envelope"></i>
+                                                            </a>
+                                                        </td> -->
+                                                    </tr>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-3 col-12">
+                                    <br>
+                                    <div class="form-group">
+                                        <button id="btnaprobar3" type="button" class="btn btn-success btn-block"><i class="fas fa-user-check"></i>&nbsp;&nbsp;<b>Aprobar</b></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-8 col-sm-6 col-12">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h4 class="card-title text-white"><i class="fas fa-people-arrows"></i>&nbsp;&nbsp;<b>CV. ENVIADOS (REVISIÓN POR JEFATURA O SOLICITANTE)</b></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-12">
+                                    <table id="example4" class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr class="text-center">
+                                                <th>Postulante</th>
+                                                <th>Fecha</th>
+                                                <th>Hora</th>
+                                                <th>Estado</th>
+                                                <th>CV (*.pdf)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (isset($this->cvenviado)) { ?>
+                                                <?php foreach ($this->cvenviado as $cv) { ?>
+                                                    <tr>
+                                                        <td class="text-left"><?php echo $cv['v_postulante'] ?></td>
+                                                        <td class="text-center"><?php echo $cv['d_fecha'] ?></td>
+                                                        <td class="text-center"><?php echo $cv['v_hora'] ?></td>
+                                                        <td class="text-center"><span class="badge bg-<?php echo $cv['v_estado_color'] ?>"><?php echo $cv['v_estado'] ?></span></td>
+                                                        <td class="text-center">
+                                                            <a class="btn btn-danger btn-sm" target="_blank" style="color:white" href="<?php echo BASE_URL . $cv['v_ruta'] ?>">
+                                                                <i class="fas fa-file-pdf"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-8 col-sm-6 col-12">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h4 class="card-title text-white"><i class="fas fa-user-check"></i>&nbsp;&nbsp;<b>CV. APROBADOS - ENTREVISTA</b></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-12">
+                                    <table id="example5" class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr class="text-center">
+                                                <th>Postulante</th>
+                                                <th>Fecha</th>
+                                                <th>Hora</th>
+                                                <th>Estado</th>
+                                                <th>CV (*.pdf)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (isset($this->cvenviadoaprobado)) { ?>
+                                                <?php foreach ($this->cvenviadoaprobado as $cvap) { ?>
+                                                    <tr>
+                                                        <td class="text-left"><?php echo $cvap['v_postulante'] ?></td>
+                                                        <td class="text-center"><?php echo $cvap['d_fecha'] ?></td>
+                                                        <td class="text-center"><?php echo $cvap['v_hora'] ?></td>
+                                                        <td class="text-center"><span class="badge bg-<?php echo $cvap['v_estado_color'] ?>"><?php echo $cvap['v_estado'] ?></span></td>
+                                                        <td class="text-center">
+                                                            <a class="btn btn-danger btn-sm" target="_blank" style="color:white" href="<?php echo BASE_URL . $cvap['v_ruta'] ?>">
+                                                                <i class="fas fa-file-pdf"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- <br>
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-3 col-12">
+                                    <div class="form-group">
+                                        <button id="btnenviocv" type="button" class="btn btn-secondary btn-block"><i class="fas fa-file-pdf"></i>&nbsp;&nbsp;<b>Enviar CV</b></button>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-sm-3 col-12">
+                                    <div class="form-group">
+                                        <button id="btndesaprobar2" type="button" class="btn btn-danger btn-block"><i class="fas fa-user-times"></i>&nbsp;&nbsp;<b>Desaprobar</b></button>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-8 col-sm-6 col-12">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h4 class="card-title text-white"><i class="fas fa-user-times"></i>&nbsp;&nbsp;<b>CV. DESAPROBADOS - ENTREVISTA</b></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-12">
+                                    <table id="example6" class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr class="text-center">
+                                                <th>Postulante</th>
+                                                <th>Fecha</th>
+                                                <th>Hora</th>
+                                                <th>Estado</th>
+                                                <th>CV (*.pdf)</th>
+                                                <!-- <th>Correo</th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (isset($this->cvenviadodesaprobado)) { ?>
+                                                <?php foreach ($this->cvenviadodesaprobado as $cvdp) { ?>
+                                                    <tr>
+                                                        <td class="text-left"><?php echo $cvdp['v_postulante'] ?></td>
+                                                        <td class="text-center"><?php echo $cvdp['d_fecha'] ?></td>
+                                                        <td class="text-center"><?php echo $cvdp['v_hora'] ?></td>
+                                                        <td class="text-center"><span class="badge bg-<?php echo $cvdp['v_estado_color'] ?>"><?php echo $cvdp['v_estado'] ?></span></td>
+                                                        <td class="text-center">
+                                                            <a class="btn btn-danger btn-sm" target="_blank" style="color:white" href="<?php echo BASE_URL . $cvdp['v_ruta'] ?>">
+                                                                <i class="fas fa-file-pdf"></i>
+                                                            </a>
+                                                        </td>
+                                                        <!-- <td class="text-center">
+                                                            <a id="<?php //echo $cvdp['i_id'] ?>" class="btn btn-warning btn-sm email" href="#" style="color:white">
+                                                                <i class="fas fa-envelope"></i>
+                                                            </a>
+                                                        </td> -->
+                                                    </tr>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col-xs-4 col-sm-3 col-12">
+                                    <br>
+                                    <div class="form-group">
+                                        <button id="btnaprobar3" type="button" class="btn btn-success btn-block"><i class="fas fa-user-check"></i>&nbsp;&nbsp;<b>Aprobar</b></button>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+    </div>
+    <!-- END: Content-->
+
+    <!-- MODAL ELIMINAR DATO-->
+    <div class="modal fade" id="modal-ecorreo" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ENVIAR CORREO:&nbsp;</h5><b><span id="idtabla"></span></b>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id='div-00' class="modal-body">
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="form-label font-weight-bolder">Nombre:</label>
+                            <input type="text" id="postnombre" class="form-control" autocomplete="off" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="form-label font-weight-bolder">correo:</label>
+                            <input type="text" id="postcorreo" class="form-control" autocomplete="off" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="form-label font-weight-bolder">Asunto:</label>
+                            <input type="text" id="postasunto" class="form-control" autocomplete="off" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="form-label font-weight-bolder">mensaje:</label>
+                            <textarea class="form-control" maxlength="1200" id="mensaje" onpaste="caracteres_mision();" onkeyup="caracteres_mision();" rows="5" placeholder="escribir breve mensaje..." autocomplete="off"></textarea>
+                            <br>
+                            <div class="text" id="res">
+                                <small><b>0 caractere/s, te quedan 1200</b></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button id="btnaceptar" type="button" class="btn btn-success btn-block">
+                                    <i class="fas fa-paper-plane"></i>
+                                    <b>Enviar</b></button>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-sm-6">
+                                <button id="btncancelar" type="button" class="btn btn-danger btn-block">
+                                    <i class="fas fa-ban"></i>
+                                    <b>Cancelar</b></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

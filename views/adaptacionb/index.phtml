@@ -1,0 +1,90 @@
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">
+                                <b><?php foreach ($_SESSION['submenus'] as $menu) { ?>
+                                        <?php if ($this->_controlador == $menu['v_link']) {
+                                            echo $menu['v_descripcion'];
+                                        } else {
+                                            '';
+                                        } ?>
+                                    <?php } ?>
+                                </b>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <section class="col-lg-12">
+                    <div class="card col-12">
+                        <div class="card-header">
+                            <h4 class="card-title">Puestos solicitados</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-12">
+                                    <table id="example1" class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr class="text-center">
+                                                <th>Código</th>
+                                                <th>Cargo</th>
+                                                <th># de vacantes</th>
+                                                <th>Fecha solicitud</th>
+                                                <th>Estado</th>
+                                                <th>fini publicación</th>
+                                                <th>ffin publicación</th>
+                                                <th>Usuario solicita</th>
+                                                <th>Descripción *.pdf</th>
+                                                <th># Publicar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (isset($this->cargossolicitados)) { ?>
+                                                <?php foreach ($this->cargossolicitados as $tr) { ?>
+                                                    <tr>
+                                                        <td class="text-center"><?php echo $tr['i_id'] ?></td>
+                                                        <td class="text-left"><?php echo $tr['v_nombre'] ?></td>
+                                                        <td class="text-center"><?php echo $tr['i_cantidad'] ?></td>
+                                                        <td class="text-center"><?php echo $tr['v_fecha'] ?></td>
+                                                        <td class="text-center"><span class="badge bg-<?php echo $tr['v_color_estado'] ?>"><?php echo $tr['v_estado'] ?></span></td>
+                                                        <td class="text-center"><?php echo $tr['v_fini_publicacion'] ?></td>
+                                                        <td class="text-center"><?php echo $tr['v_ffin_publicacion'] ?></td>
+                                                        <td class="text-center"><?php echo $tr['v_usuario'] ?></td>
+                                                        <td class='text-center'>
+                                                            <a href='<?php echo BASE_URL ?>generadoa/solicitud_generado/<?php echo $tr['v_codigo'] ?>' class='btn btn-danger btn-sm text-black' target="_blank">
+                                                                <i class='fa fa-file-pdf'></i>&nbsp;&nbsp;pdf
+                                                            </a>
+                                                        </td>
+                                                        <td class='text-center'>
+                                                            <a style="display: <?php if ($tr['v_estado'] == "solicitado") {
+                                                                                    echo "compact";
+                                                                                } else {
+                                                                                    echo "none";
+                                                                                } ?>;" href='<?php echo BASE_URL ?>adaptacionb/adaptacionb_detalle/&codigo=<?php echo $tr['i_id'] ?>&cargo=<?php echo $tr['v_nombre'] ?>' class='btn btn-primary btn-sm text-black'>
+                                                                <i class='fa fa-share'></i> <!-- publicar -->
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </div>
+    <!-- END: Content-->

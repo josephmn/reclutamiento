@@ -1,0 +1,218 @@
+<!-- BEGIN: Content-->
+<div class="app-content content ">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <h2 class="content-header-title float-left mb-0">
+                            <b><?php foreach ($_SESSION['submenus'] as $menu) { ?>
+                                    <?php if ($this->_controlador == $menu['v_link']) {
+                                        echo $menu['v_descripcion'];
+                                    } else {
+                                        '';
+                                    } ?>
+                                <?php } ?>
+                            </b>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+
+            <!-- Vertical Wizard -->
+            <section class="vertical-wizard">
+                <div class="bs-stepper vertical vertical-wizard-example">
+                    <div class="bs-stepper-header">
+                        <!-- CONFIGURACION INICIAL -->
+                        <div id="1" class="step" data-target="#configuracion-inicial">
+                            <button id="bt1" type="button" class="step-trigger">
+                                <span class="bs-stepper-box">1</span>
+                                <span class="bs-stepper-label">
+                                    <span class="bs-stepper-title">Configuración Inicial</span>
+                                </span>
+                            </button>
+                        </div>
+                        <!-- CORREO FINALISTA -->
+                        <div id="2" class="step" data-target="#correo-finalista">
+                            <button id="bt2" type="button" class="step-trigger">
+                                <span class="bs-stepper-box">2</span>
+                                <span class="bs-stepper-label">
+                                    <span class="bs-stepper-title">Configuracion envio de correo</span>
+                                </span>
+                            </button>
+                        </div>
+                        <!-- CORREO FINALISTA -->
+                        <div id="3" class="step" data-target="#configuracion-correo">
+                            <button id="bt3" type="button" class="step-trigger">
+                                <span class="bs-stepper-box">3</span>
+                                <span class="bs-stepper-label">
+                                    <span class="bs-stepper-title">Correo Finalista</span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bs-stepper-content">
+                        <!-- CONFIGURACION INCIAL -->
+                        <div id="configuracion-inicial" class="content">
+                            <div class="content-header">
+                                <h4 class="mb-0 font-weight-bolder">CONFIGURACION INICIAL DEL SISTEMA</h4>
+
+                                <body style="text-align: justify;">
+                                    <small class="text font-weight-bolder">Configurar los campos con <b class="text-danger">* </b> que son necesarios para configurar gran parte del sistema. La información
+                                        debe ser correctamente ingresada por el Administrador o responsable de Recursos Humanos.</small>
+                                </body>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <b class="text-danger">* </b><label class="form-label font-weight-bolder">RUC:</label>
+                                    <input type="text" id="cmpruc" class="form-control" autocomplete="off" value="<?php echo $this->company[0]['v_ruc'] ?>" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <b class="text-danger">* </b><label class="form-label font-weight-bolder">Razon Social:</label>
+                                    <input type="text" id="cmprazon" class="form-control" autocomplete="off" value="<?php echo $this->company[0]['v_razon'] ?>" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <b class="text-danger">* </b><label class="form-label font-weight-bolder">Dominio de Empresa: <b class="text-danger">(ejemplo: example.com)</b></label>
+                                    <input type="text" id="cmpdominio" class="form-control" autocomplete="off" value="<?php echo $this->company[0]['v_dominio'] ?>" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <button id="btnconfiguracioninicial" type="button" class="btn btn-success btn-block">
+                                            <i class="fas fa-paper-plane"></i>
+                                            <b>Guardar</b>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- CORREO FINALISTA -->
+                        <div id="correo-finalista" class="content">
+                            <div class="content-header">
+                                <h4 class="mb-0 font-weight-bolder">CONFIGURACION ENVIO DE CORREO</h4>
+
+                                <body style="text-align: justify;">
+                                    <small class="text font-weight-bolder">Configurar los campos con <b class="text-danger">* </b> que son necesarios para configurar gran parte del sistema. La información
+                                        debe ser correctamente ingresada por el Administrador o responsable de Recursos Humanos. El envío de correos son seralizados por SMTP <code>(Configuracion interna del sistema)</code>.</small>
+                                </body>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <b class="text-danger">* </b><label class="form-label font-weight-bolder">Correo electrónico de salida:</label>
+                                    <input type="text" id="correosalida" class="form-control" autocomplete="off" value="<?php echo $this->conficorreo[0]['v_correo_salida'] ?>" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="register-password" class="form-label font-weight-bolder">Contraseña de correo:</label>
+                                    <div class="input-group input-group-merge form-password-toggle">
+                                        <input type="password" id="password" class="form-control form-control-merge" value="<?php echo $this->conficorreo[0]['v_password'] ?>" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" tabindex="4" required />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <b class="text-danger">* </b><label class="form-label font-weight-bolder">Nombre de salida:</label>
+                                    <input type="text" id="nombresalida" class="form-control" autocomplete="off" value="<?php echo $this->conficorreo[0]['v_nombre_salida'] ?>" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <b class="text-danger">* </b><label class="form-label font-weight-bolder">Servidor de correo entrante:</label>
+                                    <input type="text" id="servidorentrante" class="form-control" autocomplete="off" value="<?php echo $this->conficorreo[0]['v_servidor_entrante'] ?>" />
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <b class="text-danger">* </b><label class="form-label font-weight-bolder">Puerto:</label>
+                                    <input type="text" id="puerto" class="form-control" autocomplete="off" value="<?php echo $this->conficorreo[0]['i_puerto'] ?>" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <button id="btnguardarcorreo" type="button" class="btn btn-success btn-block">
+                                            <i class="fas fa-paper-plane"></i>
+                                            <b>Guardar</b>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CONFIGURACION INCIAL -->
+                        <div id="configuracion-correo" class="content">
+                            <div class="content-header">
+                                <h4 class="mb-0 font-weight-bolder">MODELO DE CORREO PARA FINALISTA</h4>
+
+                                <body style="text-align: justify;">
+                                    <small class="text font-weight-bolder">Este modelo de correo se guardar en la base de datos para un posible envío de correo al finalista de una publicación
+                                        de empleo en el portal, por esta razón debe ser revisado por el Administrador o responsable de Recursos Humanos.</small>
+                                    <br>
+                                    <br>
+                                    <small class="text font-weight-bolder">Requisitos:</small>
+                                    <li>
+                                        <label class="form-label font-weight-bolder">CC: <b class="text-danger">* (los correos usados aqui deben existir como usuarios y con el dominio de la empresa.)</b></label>
+                                    </li>
+                                    <li>
+                                        <label class="form-label font-weight-bolder">Asunto: <b class="text-danger">* (<code>[CARGO]</code>, encerrar en [ ] (corchetes) en el asunto, si desea agregar de manera dinamica el cargo publicado.)</b></label>
+                                    </li>
+                                    <li>
+                                        <label class="form-label font-weight-bolder">Mensaje: <b class="text-danger">* (<code>[CARGO]</code>, encerrar en [ ] (corchetes) en el mensaje, si desea agregar de manera dinamica el cargo publicado; ademas para los saltos de linea usar: <code><span id="valorx"></span></code>)</b></label>
+                                    </li>
+                                </body>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label font-weight-bolder">CC:</label>
+                                    <select id="postcc" class="select2 form-control jscorreocc" multiple><?php echo $this->combocc ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label font-weight-bolder">Asunto:</label>
+                                    <input type="text" id="postasunto" class="form-control" autocomplete="off" value="<?php echo $this->mensajefinalista[0]['v_asunto'] ?>" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label font-weight-bolder">Mensaje:</label>
+                                    <textarea id="mensaje" data-length="1200" maxlength="1200" class="form-control char-textarea-mision" rows="10" autocomplete="off" placeholder="escribir breve mensaje..."><?php echo $this->mensajefinalista[0]['v_mensaje'] ?></textarea>
+                                    <small class="textarea-counter-value float-right"><span class="char-count-mision"><?php if ($this->mensajefinalista[0]['i_mensaje'] == 0) {
+                                                                                                                            echo 0;
+                                                                                                                        } else {
+                                                                                                                            echo $this->mensajefinalista[0]['i_mensaje'];
+                                                                                                                        }; ?></span> / 1200 </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <button id="btncorreofinalista" type="button" class="btn btn-success btn-block">
+                                            <i class="fas fa-paper-plane"></i>
+                                            <b>Guardar</b>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /Vertical Wizard -->
+
+        </div>
+    </div>
+</div>
+<!-- END: Content-->
