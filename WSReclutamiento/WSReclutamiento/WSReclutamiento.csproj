@@ -1,0 +1,373 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A59F22E8-42A0-4182-BD2A-1DA1128BA370}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WSReclutamiento</RootNamespace>
+    <AssemblyName>WSReclutamiento</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net35\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\RSWEB.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+    <Content Include="WSReclutamiento.asmx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="conexion.cs" />
+    <Compile Include="Controlador\CConsultaArchivosPostulados.cs" />
+    <Compile Include="Controlador\CConsultaPaPersonalHijos.cs" />
+    <Compile Include="Controlador\CConsultaPaPersonal.cs" />
+    <Compile Include="Controlador\CConsultaTipoArchivo.cs" />
+    <Compile Include="Controlador\CConsultaMensajeFinalista.cs" />
+    <Compile Include="Controlador\CConsultaListaSolicitud.cs" />
+    <Compile Include="Controlador\CConsultaPuestoAGEN.cs" />
+    <Compile Include="Controlador\CConsultaSolicitudes.cs" />
+    <Compile Include="Controlador\CConsultaCompania.cs" />
+    <Compile Include="Controlador\CConfiguracionCorreo.cs" />
+    <Compile Include="Controlador\CMantArchivosPostulados.cs" />
+    <Compile Include="Controlador\CMantConfiguracionCorreo.cs" />
+    <Compile Include="Controlador\CMantPersonalHijos.cs" />
+    <Compile Include="Controlador\CMantPersonal.cs" />
+    <Compile Include="Controlador\CMantMensajeFinalista.cs" />
+    <Compile Include="Controlador\CMantCorreoFinalista.cs" />
+    <Compile Include="Controlador\CMantCompania.cs" />
+    <Compile Include="Controlador\CMantFinalista.cs" />
+    <Compile Include="Controlador\CMantLogCorreos.cs" />
+    <Compile Include="Controlador\CRecuperarClave.cs" />
+    <Compile Include="Controlador\CPaAFP.cs" />
+    <Compile Include="Controlador\CPaNivelD.cs" />
+    <Compile Include="Controlador\CPaCivil.cs" />
+    <Compile Include="Controlador\CPaTipoDocumento.cs" />
+    <Compile Include="Controlador\CConsultaRegFinalista.cs" />
+    <Compile Include="Controlador\CPublicado.cs" />
+    <Compile Include="Controlador\CRPAEspecificas.cs" />
+    <Compile Include="Controlador\CRPATransversales.cs" />
+    <Compile Include="Controlador\CVerificacion.cs" />
+    <Compile Include="Controlador\CMantSolicitudes.cs" />
+    <Compile Include="Controlador\CMantUsuarios.cs" />
+    <Compile Include="Controlador\CUsuarios.cs" />
+    <Compile Include="Controlador\CConPerfilesAccess.cs" />
+    <Compile Include="Controlador\CConPerfiles.cs" />
+    <Compile Include="Controlador\CMantPerfiles.cs" />
+    <Compile Include="Controlador\CMantPerfilesAccesos.cs" />
+    <Compile Include="Controlador\CNotas.cs" />
+    <Compile Include="Controlador\CCalendarioCita.cs" />
+    <Compile Include="Controlador\CCalendarioCategoria.cs" />
+    <Compile Include="Controlador\CConsultaCV.cs" />
+    <Compile Include="Controlador\CCalendario.cs" />
+    <Compile Include="Controlador\CMantNotas.cs" />
+    <Compile Include="Controlador\CMantCalendario.cs" />
+    <Compile Include="Controlador\CMantCategoriaCalendario.cs" />
+    <Compile Include="Controlador\CMantPostulantesDetalle.cs" />
+    <Compile Include="Controlador\CMantPostulacion.cs" />
+    <Compile Include="Controlador\CMantCV.cs" />
+    <Compile Include="Controlador\CEntrevistaB.cs" />
+    <Compile Include="Controlador\CEntrevistaBDetalle.cs" />
+    <Compile Include="Controlador\CSeguimiento.cs" />
+    <Compile Include="Controlador\CPublicacionBDetalle.cs" />
+    <Compile Include="Controlador\CPublicacionB.cs" />
+    <Compile Include="Controlador\CMisPostulaciones.cs" />
+    <Compile Include="Controlador\CPublicacionPerfil.cs" />
+    <Compile Include="Controlador\CPublicacionTarea.cs" />
+    <Compile Include="Controlador\CPublicacion.cs" />
+    <Compile Include="Controlador\CPublicacionCAB.cs" />
+    <Compile Include="Controlador\CDistrito.cs" />
+    <Compile Include="Controlador\CRegistroPublicacionB.cs" />
+    <Compile Include="Controlador\CRPBPerfil.cs" />
+    <Compile Include="Controlador\CRPBTarea.cs" />
+    <Compile Include="Controlador\CTipoContrato.cs" />
+    <Compile Include="Controlador\CProvincia.cs" />
+    <Compile Include="Controlador\CDepartamento.cs" />
+    <Compile Include="Controlador\CPais.cs" />
+    <Compile Include="Controlador\CConsultaLogin.cs" />
+    <Compile Include="Controlador\CConsultaProgramas.cs" />
+    <Compile Include="Controlador\CConsultaIdiomas.cs" />
+    <Compile Include="Controlador\CConsultaDecisiones.cs" />
+    <Compile Include="Controlador\CConsultaEspecificas.cs" />
+    <Compile Include="Controlador\CConsultaTransversales.cs" />
+    <Compile Include="Controlador\CConsultaRelaciones.cs" />
+    <Compile Include="Controlador\CConsultaOrganizacion.cs" />
+    <Compile Include="Controlador\CConsultaImpacto.cs" />
+    <Compile Include="Controlador\CConsultaResponsabilidad.cs" />
+    <Compile Include="Controlador\CEspecifica.cs" />
+    <Compile Include="Controlador\CConsultaGenerado.cs" />
+    <Compile Include="Controlador\CMantPassword.cs" />
+    <Compile Include="Controlador\CMantLogin.cs" />
+    <Compile Include="Controlador\CRPADecisiones.cs" />
+    <Compile Include="Controlador\CRPAProgramas.cs" />
+    <Compile Include="Controlador\CRPAIdiomas.cs" />
+    <Compile Include="Controlador\CRPARelaciones.cs" />
+    <Compile Include="Controlador\CRPAOrganizacion.cs" />
+    <Compile Include="Controlador\CRPAImpacto.cs" />
+    <Compile Include="Controlador\CRPAResponsabilidades.cs" />
+    <Compile Include="Controlador\CConsultaPuestoA.cs" />
+    <Compile Include="Controlador\CTransversal.cs" />
+    <Compile Include="Controlador\CGenCorrelativo.cs" />
+    <Compile Include="Controlador\CRegistroPuestoA.cs" />
+    <Compile Include="Controlador\CCargo.cs" />
+    <Compile Include="Controlador\CMantCargo.cs" />
+    <Compile Include="Controlador\CSubMenu.cs" />
+    <Compile Include="Controlador\CMenu.cs" />
+    <Compile Include="Controlador\CLogin.cs" />
+    <Compile Include="Controlador\CRegistroConsulta.cs" />
+    <Compile Include="Controlador\CValidarCodigo.cs" />
+    <Compile Include="Controlador\CRegistroLogin.cs" />
+    <Compile Include="Entidad\EConsultaArchivosPostulados.cs" />
+    <Compile Include="Entidad\EConsultaPaPersonal.cs" />
+    <Compile Include="Entidad\EConsultaPaPersonalHijos.cs" />
+    <Compile Include="Entidad\EConsultaTipoArchivo.cs" />
+    <Compile Include="Entidad\EConsultaMensajeFinalista.cs" />
+    <Compile Include="Entidad\EConsultaListaSolicitud.cs" />
+    <Compile Include="Entidad\EConsultaPuestoAGEN.cs" />
+    <Compile Include="Entidad\EConsultaCompania.cs" />
+    <Compile Include="Entidad\EConsultaSolicitudes.cs" />
+    <Compile Include="Entidad\EConfiguracionCorreo.cs" />
+    <Compile Include="Entidad\ERecuperarClave.cs" />
+    <Compile Include="Entidad\EPaAFP.cs" />
+    <Compile Include="Entidad\EConsultaRegFinalista.cs" />
+    <Compile Include="Entidad\EPaNivelD.cs" />
+    <Compile Include="Entidad\EPaCivil.cs" />
+    <Compile Include="Entidad\EPaTipoDocumento.cs" />
+    <Compile Include="Entidad\EPublicado.cs" />
+    <Compile Include="Entidad\EUsuarios.cs" />
+    <Compile Include="Entidad\EConPerfilesAccesos.cs" />
+    <Compile Include="Entidad\EConPerfiles.cs" />
+    <Compile Include="Entidad\ENotas.cs" />
+    <Compile Include="Entidad\ECalendarioCita.cs" />
+    <Compile Include="Entidad\ECalendarioCategoria.cs" />
+    <Compile Include="Entidad\EConsultaCV.cs" />
+    <Compile Include="Entidad\EEntrevistaB.cs" />
+    <Compile Include="Entidad\EEntrevistaBDetalle.cs" />
+    <Compile Include="Entidad\ECalendario.cs" />
+    <Compile Include="Entidad\ESeguimiento.cs" />
+    <Compile Include="Entidad\EPublicacionBDetalle.cs" />
+    <Compile Include="Entidad\EPublicacionB.cs" />
+    <Compile Include="Entidad\EMisPostulaciones.cs" />
+    <Compile Include="Entidad\EPublicacionPerfil.cs" />
+    <Compile Include="Entidad\EPublicacionTarea.cs" />
+    <Compile Include="Entidad\EPublicacion.cs" />
+    <Compile Include="Entidad\EPublicacionCAB.cs" />
+    <Compile Include="Entidad\EDistrito.cs" />
+    <Compile Include="Entidad\ETipoContrato.cs" />
+    <Compile Include="Entidad\EProvincia.cs" />
+    <Compile Include="Entidad\EDepartamento.cs" />
+    <Compile Include="Entidad\EPais.cs" />
+    <Compile Include="Entidad\EConsultaLogin.cs" />
+    <Compile Include="Entidad\EConsultaProgramas.cs" />
+    <Compile Include="Entidad\EConsultaIdiomas.cs" />
+    <Compile Include="Entidad\EConsultaEspecificas.cs" />
+    <Compile Include="Entidad\EConsultaTransversales.cs" />
+    <Compile Include="Entidad\EConsultaDecisiones.cs" />
+    <Compile Include="Entidad\EConsultaRelaciones.cs" />
+    <Compile Include="Entidad\EConsultaOrganizacion.cs" />
+    <Compile Include="Entidad\EConsultaImpacto.cs" />
+    <Compile Include="Entidad\EConsultaResponsabilidad.cs" />
+    <Compile Include="Entidad\EEspecifica.cs" />
+    <Compile Include="Entidad\EConsultaGenerado.cs" />
+    <Compile Include="Entidad\ETransversal.cs" />
+    <Compile Include="Entidad\EGenCorrelativo.cs" />
+    <Compile Include="Entidad\EConsultaPuestoA.cs" />
+    <Compile Include="Entidad\ECargo.cs" />
+    <Compile Include="Entidad\EMantenimiento.cs" />
+    <Compile Include="Entidad\ESubMenu.cs" />
+    <Compile Include="Entidad\EMenu.cs" />
+    <Compile Include="Entidad\ELogin.cs" />
+    <Compile Include="Entidad\ERegistroConsulta.cs" />
+    <Compile Include="Entidad\EValidarCodigo.cs" />
+    <Compile Include="Entidad\ERegistroLogin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vista\VConsultaArchivosPostulados.cs" />
+    <Compile Include="Vista\VConsultaPaPersonal.cs" />
+    <Compile Include="Vista\VConsultaPaPersonalHijos.cs" />
+    <Compile Include="Vista\VConsultaTipoArchivo.cs" />
+    <Compile Include="Vista\VConsultaMensajeFinalista.cs" />
+    <Compile Include="Vista\VConsultaListaSolicitud.cs" />
+    <Compile Include="Vista\VConsultaPuestoAGEN.cs" />
+    <Compile Include="Vista\VConsultaSolicitudes.cs" />
+    <Compile Include="Vista\VConsultaCompania.cs" />
+    <Compile Include="Vista\VConfiguracionCorreo.cs" />
+    <Compile Include="Vista\VMantArchivosPostulados.cs" />
+    <Compile Include="Vista\VMantConfiguracionCorreo.cs" />
+    <Compile Include="Vista\VMantPersonalHijos.cs" />
+    <Compile Include="Vista\VMantPersonal.cs" />
+    <Compile Include="Vista\VMantMensajeFinalista.cs" />
+    <Compile Include="Vista\VMantCorreoFinalista.cs" />
+    <Compile Include="Vista\VMantCompania.cs" />
+    <Compile Include="Vista\VMantFinalista.cs" />
+    <Compile Include="Vista\VMantLogCorreos.cs" />
+    <Compile Include="Vista\VRecuperarClave.cs" />
+    <Compile Include="Vista\VPaAFP.cs" />
+    <Compile Include="Vista\VPaNivelD.cs" />
+    <Compile Include="Vista\VPaCivil.cs" />
+    <Compile Include="Vista\VPaTipoDocumento.cs" />
+    <Compile Include="Vista\VConsultaRegFinalista.cs" />
+    <Compile Include="Vista\VPublicado.cs" />
+    <Compile Include="Vista\VRPAEspecificas.cs" />
+    <Compile Include="Vista\VRPATransversales.cs" />
+    <Compile Include="Vista\VVerificacion.cs" />
+    <Compile Include="Vista\VMantSolicitudes.cs" />
+    <Compile Include="Vista\VMantUsuarios.cs" />
+    <Compile Include="Vista\VUsuarios.cs" />
+    <Compile Include="Vista\VConPerfilesAccesos.cs" />
+    <Compile Include="Vista\VConPerfiles.cs" />
+    <Compile Include="Vista\VMantPerfiles.cs" />
+    <Compile Include="Vista\VMantPerfilesAccesos.cs" />
+    <Compile Include="Vista\VNotas.cs" />
+    <Compile Include="Vista\VCalendarioCita.cs" />
+    <Compile Include="Vista\VCalendarioCategoria.cs" />
+    <Compile Include="Vista\VConsultaCV.cs" />
+    <Compile Include="Vista\VCalendario.cs" />
+    <Compile Include="Vista\VMantNotas.cs" />
+    <Compile Include="Vista\VMantCategoriaCalendario.cs" />
+    <Compile Include="Vista\VMantCalendario.cs" />
+    <Compile Include="Vista\VMantPostulantesDetalle.cs" />
+    <Compile Include="Vista\VMantPostulacion.cs" />
+    <Compile Include="Vista\VMantCV.cs" />
+    <Compile Include="Vista\VEntrevistaB.cs" />
+    <Compile Include="Vista\VEntrevistaBDetalle.cs" />
+    <Compile Include="Vista\VSeguimiento.cs" />
+    <Compile Include="Vista\VPublicacionBDetalle.cs" />
+    <Compile Include="Vista\VPublicacionB.cs" />
+    <Compile Include="Vista\VMisPostulaciones.cs" />
+    <Compile Include="Vista\VPublicacionPerfil.cs" />
+    <Compile Include="Vista\VPublicacionTarea.cs" />
+    <Compile Include="Vista\VPublicacion.cs" />
+    <Compile Include="Vista\VPublicacionCAB.cs" />
+    <Compile Include="Vista\VDistrito.cs" />
+    <Compile Include="Vista\VRegistroPublicacionB.cs" />
+    <Compile Include="Vista\VRPBPerfil.cs" />
+    <Compile Include="Vista\VRPBTarea.cs" />
+    <Compile Include="Vista\VTipoContrato.cs" />
+    <Compile Include="Vista\VProvincia.cs" />
+    <Compile Include="Vista\VDepartamento.cs" />
+    <Compile Include="Vista\VPais.cs" />
+    <Compile Include="Vista\VConsultaLogin.cs" />
+    <Compile Include="Vista\VConsultaProgramas.cs" />
+    <Compile Include="Vista\VConsultaIdiomas.cs" />
+    <Compile Include="Vista\VConsultaDecisiones.cs" />
+    <Compile Include="Vista\VConsultaEspecificas.cs" />
+    <Compile Include="Vista\VConsultaTransversales.cs" />
+    <Compile Include="Vista\VConsultaRelaciones.cs" />
+    <Compile Include="Vista\VConsultaOrganizacion.cs" />
+    <Compile Include="Vista\VConsultaImpacto.cs" />
+    <Compile Include="Vista\VConsultaResponsabilidad.cs" />
+    <Compile Include="Vista\VConsultaPuestoA.cs" />
+    <Compile Include="Vista\VEspecifica.cs" />
+    <Compile Include="Vista\VConsultaGenerado.cs" />
+    <Compile Include="Vista\VMantPassword.cs" />
+    <Compile Include="Vista\VMantLogin.cs" />
+    <Compile Include="Vista\VRPADecisiones.cs" />
+    <Compile Include="Vista\VRPAProgramas.cs" />
+    <Compile Include="Vista\VRPAIdiomas.cs" />
+    <Compile Include="Vista\VRPARelaciones.cs" />
+    <Compile Include="Vista\VRPAOrganizacion.cs" />
+    <Compile Include="Vista\VRPAImpacto.cs" />
+    <Compile Include="Vista\VRPAResponsabilidades.cs" />
+    <Compile Include="Vista\VTransversal.cs" />
+    <Compile Include="Vista\VGenCorrelativo.cs" />
+    <Compile Include="Vista\VCargo.cs" />
+    <Compile Include="Vista\VRegistroPuestoA.cs" />
+    <Compile Include="Vista\VMantCargo.cs" />
+    <Compile Include="Vista\VSubMenu.cs" />
+    <Compile Include="Vista\VMenu.cs" />
+    <Compile Include="Vista\VLogin.cs" />
+    <Compile Include="Vista\VRegistroConsulta.cs" />
+    <Compile Include="Vista\VValidarCodigo.cs" />
+    <Compile Include="Vista\VRegistroLogin.cs" />
+    <Compile Include="WSReclutamiento.asmx.cs">
+      <DependentUpon>WSReclutamiento.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56340</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:80/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:80/</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

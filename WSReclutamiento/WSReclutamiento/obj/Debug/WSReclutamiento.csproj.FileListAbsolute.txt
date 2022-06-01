@@ -1,0 +1,10 @@
+C:\Users\programador.app02\Desktop\WSReclutamiento\WSReclutamiento\bin\WSReclutamiento.dll.config
+C:\Users\programador.app02\Desktop\WSReclutamiento\WSReclutamiento\bin\WSReclutamiento.dll
+C:\Users\programador.app02\Desktop\WSReclutamiento\WSReclutamiento\bin\WSReclutamiento.pdb
+C:\Users\programador.app02\Desktop\WSReclutamiento\WSReclutamiento\bin\Newtonsoft.Json.dll
+C:\Users\programador.app02\Desktop\WSReclutamiento\WSReclutamiento\bin\Newtonsoft.Json.xml
+C:\Users\programador.app02\Desktop\WSReclutamiento\WSReclutamiento\obj\Debug\WSReclutamiento.csproj.CoreCompileInputs.cache
+C:\Users\programador.app02\Desktop\WSReclutamiento\WSReclutamiento\obj\Debug\WSReclutamiento.csproj.CopyComplete
+C:\Users\programador.app02\Desktop\WSReclutamiento\WSReclutamiento\obj\Debug\WSReclutamiento.dll
+C:\Users\programador.app02\Desktop\WSReclutamiento\WSReclutamiento\obj\Debug\WSReclutamiento.pdb
+C:\Users\programador.app02\Desktop\WSReclutamiento\WSReclutamiento\obj\Debug\WSReclutamiento.csproj.AssemblyReference.cache
