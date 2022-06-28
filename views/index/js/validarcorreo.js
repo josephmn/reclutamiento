@@ -129,7 +129,7 @@ $(function () {
               });
               $("#modal-agregar").modal("hide");
               var id = setInterval(function () {
-                location.href = "http://localhost/reclutamiento/index/index";
+                location.href = "https://verdum.com/reclutamiento/index/index";
                 clearInterval(id);
               }, 4000);
               break;

@@ -57,7 +57,7 @@ $(function () {
             $("#enviarclave").prop("disabled", false);
             $("#enviarclave").html("Enviar correo");
             setInterval(function () {
-              location.href = "http://localhost/reclutamiento/index/index";
+              location.href = "https://verdum.com/reclutamiento/index/index";
             }, 4000);
             break;
           case 2: // CORREO NO ENCONTRADO EN LA BASE DE DATOS

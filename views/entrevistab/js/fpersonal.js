@@ -527,7 +527,7 @@ $(function () {
                     });
                     var id = setInterval(function () {
                       location.href =
-                        "http://localhost/reclutamiento/mispostulaciones/index";
+                        "https://verdum.com/reclutamiento/mispostulaciones/index";
                       clearInterval(id);
                     }, res.itimer);
                   } else {
@@ -607,7 +607,7 @@ $(function () {
                 });
                 var id = setInterval(function () {
                   location.href =
-                    "http://localhost/reclutamiento/mispostulaciones/index";
+                    "https://verdum.com/reclutamiento/mispostulaciones/index";
                   clearInterval(id);
                 }, res.itimer);
               } else {
@@ -622,7 +622,7 @@ $(function () {
                 });
                 var id = setInterval(function () {
                   location.href =
-                    "http://localhost/reclutamiento/reclutamiento/mispostulaciones/index";
+                    "https://verdum.com/reclutamiento/reclutamiento/mispostulaciones/index";
                   clearInterval(id);
                 }, res.itimer);
               }

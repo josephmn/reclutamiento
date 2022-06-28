@@ -137,7 +137,7 @@ function clickpostularme(string) {
       //   title: "Gracias, pronto nos contactaremos contigo",
       //   html:
       //   'Puedes hacer el seguimiento de la postulacion en la pestaña de ' +
-      //   '<a href="http://localhost:8080/reclutamiento/index/index">seguimientos</a> ',
+      //   '<a href="https://verdum.com/reclutamiento/index/index">seguimientos</a> ',
       //   icon: "success",
       //   timer: 7000,
       //   timerProgressBar: true,
