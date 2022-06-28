@@ -12,6 +12,8 @@ class generadoaController extends Controller
 	{
 		if (isset($_SESSION['usuario'])) {
 
+			$this->_view->conctructor_menu('control','generadoa');
+
 			$this->_view->setCss_Specific(
 				array(
 					'dist/css/fontawesome/css/all',
@@ -935,6 +937,8 @@ class generadoaController extends Controller
 	public function detalle_generado()
 	{
 		if (isset($_SESSION['usuario'])) {
+
+			$this->_view->conctructor_menu('control','generadoa');
 
 			$codigo = $_GET['codigo'];
 			$cargo = $_GET['cargo'];

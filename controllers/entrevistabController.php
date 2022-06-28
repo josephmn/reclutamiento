@@ -12,6 +12,8 @@ class entrevistabController extends Controller
 	{
 		if (isset($_SESSION['usuario'])) {
 
+			$this->_view->conctructor_menu('control','entrevistab');
+
 			$this->_view->setCss_Specific(
 				array(
 					'dist/css/fontawesome/css/all',
@@ -107,6 +109,8 @@ class entrevistabController extends Controller
 	public function estrevista_detalle() //cargar index para detalle por publicaciones
 	{
 		if (isset($_SESSION['usuario'])) {
+
+			$this->_view->conctructor_menu('control','entrevistab');
 
 			$this->_view->setCss_Specific(
 				array(

@@ -156,7 +156,8 @@
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
-                        <!-- <a class="dropdown-item" href="<?php //echo BASE_URL ?>perfil/index"><i class="mr-50" data-feather="user"></i>Perfil</a> -->
+                        <!-- <a class="dropdown-item" href="<?php //echo BASE_URL 
+                                                            ?>perfil/index"><i class="mr-50" data-feather="user"></i>Perfil</a> -->
                         <!-- <a class="dropdown-item" href="app-chat.html"><i class="mr-50" data-feather="message-square"></i> Chats</a> -->
                         <!-- <div class="dropdown-divider"></div> -->
                         <!-- <a class="dropdown-item" href="page-account-settings.html"><i class="mr-50" data-feather="settings"></i>Configuración</a> -->
@@ -184,33 +185,7 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <?php foreach ($_SESSION['menus'] as $menu) { ?>
-                    
-                    <li class="<?php if ($_SESSION['selmenu'] == $menu['v_link']) {if ($menu['i_submenu']==1){echo "";}else{echo "active";}}?> nav-item <?php if ($_SESSION['selmenu'] == $menu['v_link']) {echo $_SESSION['despliegue'];}?>">
-                        <a onclick="navegacionmenu('<?php echo $menu['v_link'] ?>')" class="nav-link" href="<?php echo BASE_URL . $menu['v_link'] ?>/index">
-                            <i data-feather="<?php echo $menu['v_icono'] ?>"></i>
-                            <span class="menu-title text-truncate"><?php echo str_replace("&otilde;", "ó", $menu['v_nombre']) ?></span>
-                        </a>
-
-                        <?php if (isset($_SESSION['submenus'])) { ?>
-                            <?php foreach ($_SESSION['submenus'] as $submenu) { ?>
-                                <?php if ($submenu['i_idmenu'] == $menu['i_id']) { ?>
-
-                                    <ul class="nav-treeview">
-                                        <li class="<?php if ($_SESSION['selsubmenu'] == $submenu['v_link']) {echo "active";} else {echo "";} ?> nav-item">
-                                            <a onclick="clicksub('<?php echo $submenu['v_link'] ?>')" class="d-flex align-items-center" href="<?php echo BASE_URL . $submenu['v_link'] ?>/index" class="nav-link">
-                                                <i data-feather="<?php echo $submenu['v_icono'] ?>"></i>
-                                                <span><?php echo $submenu['v_nombre'] ?></span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                <?php } ?>
-                            <?php } ?>
-                        <?php } ?>
-
-                    </li>
-
-                <?php } ?>
+                <?php echo $_SESSION['menuinicial'] ?>
             </ul>
         </div>
     </div>

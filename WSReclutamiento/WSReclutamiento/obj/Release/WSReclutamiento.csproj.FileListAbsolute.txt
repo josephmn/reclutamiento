@@ -28,3 +28,13 @@ C:\Users\ALEJANDRO\Desktop\WSReclutamiento\WSReclutamiento\obj\Release\WSRecluta
 C:\Users\ALEJANDRO\Desktop\WSReclutamiento\WSReclutamiento\obj\Release\WSReclutamiento.dll
 C:\Users\ALEJANDRO\Desktop\WSReclutamiento\WSReclutamiento\obj\Release\WSReclutamiento.pdb
 C:\Users\ALEJANDRO\Desktop\WSReclutamiento\WSReclutamiento\obj\Release\WSReclutamiento.csproj.CopyComplete
+C:\Apache24\htdocs\reclutamiento\WSReclutamiento\WSReclutamiento\bin\WSReclutamiento.dll.config
+C:\Apache24\htdocs\reclutamiento\WSReclutamiento\WSReclutamiento\bin\WSReclutamiento.dll
+C:\Apache24\htdocs\reclutamiento\WSReclutamiento\WSReclutamiento\bin\WSReclutamiento.pdb
+C:\Apache24\htdocs\reclutamiento\WSReclutamiento\WSReclutamiento\bin\Newtonsoft.Json.dll
+C:\Apache24\htdocs\reclutamiento\WSReclutamiento\WSReclutamiento\bin\Newtonsoft.Json.xml
+C:\Apache24\htdocs\reclutamiento\WSReclutamiento\WSReclutamiento\obj\Release\WSReclutamiento.csproj.AssemblyReference.cache
+C:\Apache24\htdocs\reclutamiento\WSReclutamiento\WSReclutamiento\obj\Release\WSReclutamiento.csproj.CoreCompileInputs.cache
+C:\Apache24\htdocs\reclutamiento\WSReclutamiento\WSReclutamiento\obj\Release\WSReclutamiento.csproj.CopyComplete
+C:\Apache24\htdocs\reclutamiento\WSReclutamiento\WSReclutamiento\obj\Release\WSReclutamiento.dll
+C:\Apache24\htdocs\reclutamiento\WSReclutamiento\WSReclutamiento\obj\Release\WSReclutamiento.pdb

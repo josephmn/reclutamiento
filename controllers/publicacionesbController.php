@@ -12,6 +12,8 @@ class publicacionesbController extends Controller
 	{
 		if (isset($_SESSION['usuario'])) {
 
+			$this->_view->conctructor_menu('control','publicacionesb');
+
 			$this->_view->setCss_Specific(
 				array(
 					'dist/css/fontawesome/css/all',
@@ -88,6 +90,8 @@ class publicacionesbController extends Controller
 	public function postulaciones_detalle()
 	{
 		if (isset($_SESSION['usuario'])) {
+
+			$this->_view->conctructor_menu('control','publicacionesb');
 
 			$this->_view->setCss_Specific(
 				array(
@@ -240,6 +244,8 @@ class publicacionesbController extends Controller
 	public function mantenimiento_publicacion()
 	{
 		if (isset($_SESSION['usuario'])) {
+
+			$this->_view->conctructor_menu('control','publicacionesb');
 
 			$this->_view->setCss_Specific(
 				array(

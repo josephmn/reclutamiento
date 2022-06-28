@@ -12,6 +12,8 @@ class puestosbController extends Controller
 	{
 		if (isset($_SESSION['usuario'])) {
 
+			$this->_view->conctructor_menu('control','puestosb');
+
 			$this->_view->setCss_Specific(
 				array(
 					'dist/css/fontawesome/css/all',

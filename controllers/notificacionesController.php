@@ -12,6 +12,8 @@ class notificacionesController extends Controller
 	{
 		if (isset($_SESSION['usuario'])) {
 
+			$this->_view->conctructor_menu('configuracion','notificaciones');
+
 			$this->_view->setCss_Specific(
 				array(
 					'dist/css/vendors.min',

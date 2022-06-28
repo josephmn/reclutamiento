@@ -12,6 +12,8 @@ class adaptacionbController extends Controller
 	{
 		if (isset($_SESSION['usuario'])) {
 
+			$this->_view->conctructor_menu('control','adaptacionb');
+
 			$this->_view->setCss_Specific(
 				array(
 					'dist/css/fontawesome/css/all',
@@ -117,6 +119,8 @@ class adaptacionbController extends Controller
 	public function adaptacionb_detalle()
 	{
 		if (isset($_SESSION['usuario'])) {
+
+			$this->_view->conctructor_menu('control','adaptacionb');
 
 			$this->_view->setCss_Specific(
 				array(

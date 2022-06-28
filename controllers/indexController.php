@@ -120,7 +120,8 @@ class indexController extends Controller
 		$this->_view->renderizar('validarcorreo', true);
 	}
 
-	public function enviarcorreo(){
+	public function enviarcorreo()
+	{
 
 		putenv("NLS_LANG=SPANISH_SPAIN.AL32UTF8");
 		putenv("NLS_CHARACTERSET=AL32UTF8");
@@ -130,8 +131,8 @@ class indexController extends Controller
 
 		$correo = $_POST['correo'];
 
-		if (!empty($correo)){
-			
+		if (!empty($correo)) {
+
 			$wsdl = 'http://localhost:81/RSWEB/WSReclutamiento.asmx?WSDL';
 
 			$options = array(
@@ -154,16 +155,16 @@ class indexController extends Controller
 			$result = $soap->RecuperarClave($param);
 			$recuperacorreo = json_decode($result->RecuperarClaveResult, true);
 
-			if (!empty($recuperacorreo)){
-				
+			if (!empty($recuperacorreo)) {
+
 				$result2 = $soap->ConfiguracionCorreo();
 				$conficorreo = json_decode($result2->ConfiguracionCorreoResult, true);
 
 				$this->getLibrary('phpmailer/PHPMailer');
 				$this->getLibrary('phpmailer/SMTP');
-				
+
 				$mail = new PHPMailer;
-				
+
 				$mail->isSMTP();
 				$mail->SMTPDebug = 0;
 				$mail->SMTPAuth = true;
@@ -176,19 +177,19 @@ class indexController extends Controller
 				$mail->From = ($conficorreo[0]['v_correo_salida']); //reportes@cafealtomayo.com.pe
 				$mail->FromName = $conficorreo[0]['v_nombre_salida']; // VERDUM PERÚ SAC
 				//$mail->addReplyTo('reportes@cafealtomayo.com.pe', 'reportes');
-				$mail->addAddress($recuperacorreo[0]['v_correo'],$recuperacorreo[0]['v_nombres']);
+				$mail->addAddress($recuperacorreo[0]['v_correo'], $recuperacorreo[0]['v_nombres']);
 				$mail->Subject = 'SOLICITUD DE RECUPERACION DE CLAVE';
-				
+
 				$mail->isHTML(true);
 				$mail->CharSet = "utf-8";
 				$mail->Subject = 'PORTAL DE RECLUTAMIENTO - RECUPERACION DE CLAVE';
 				$mail->Body = "
-				Hola <b>".$recuperacorreo[0]['v_nombres']."</b>,
+				Hola <b>" . $recuperacorreo[0]['v_nombres'] . "</b>,
 				<br>
 				<br>
 				Te enviamos la clave automática generada para el ingreso al portal web de reclutamiento.<br>
 				<br>
-				Clave: <b>".$recuperacorreo[0]['v_reset_clave']."</b>
+				Clave: <b>" . $recuperacorreo[0]['v_reset_clave'] . "</b>
 				<br>
 				<br>
 				Favor de cuando ingrese cambiar la clave por seguridad.
@@ -196,29 +197,26 @@ class indexController extends Controller
 				<br>
 				Saludo,<br>
 				VERDUM PERU SAC.";
-				
+
 				if (!$mail->send()) {
 					$output = 3; //	ERROR AL ENVIAR CORREO
 				} else {
 					$output = 1; // SE ENVIO CORRECTAMENTE
 				}
-
-			}else{
+			} else {
 				$output = 2; //NO SE ENCONTRO CORREO EN LA BASE DE DATOS
 			}
-
-		}else{
+		} else {
 			$output = 0; // NO HA INGRESADO CORREO
 		}
 
 		header('Content-type: application/json; charset=utf-8');
-    
+
 		echo $json->encode(
 			array(
 				"dato"	=>	$output,
 			)
 		);
-
 	}
 
 	public function correoexiste()
@@ -229,11 +227,11 @@ class indexController extends Controller
 
 		$this->getLibrary('json_php/JSON');
 		$json = new Services_JSON();
-		
+
 		$correo = $_POST['correo'];
 
-		if (!empty($correo)){
-			
+		if (!empty($correo)) {
+
 			$wsdl = 'http://localhost:81/RSWEB/WSReclutamiento.asmx?WSDL';
 
 			$options = array(
@@ -256,25 +254,25 @@ class indexController extends Controller
 			$result = $soap->RecuperarClave($param);
 			$recuperacorreo = json_decode($result->RecuperarClaveResult, true);
 
-			if (!empty($recuperacorreo)){
+			if (!empty($recuperacorreo)) {
 
 				$params2 = array(
 					'post'		=> 2, //reset y consulta
 					'correo' 	=> $correo,
 				);
-	
+
 				$result = $soap->RegistroConsulta($params2);
 				$registroconsulta = json_decode($result->RegistroConsultaResult, true);
 
 				$result2 = $soap->ConfiguracionCorreo();
 				$conficorreo = json_decode($result2->ConfiguracionCorreoResult, true);
-		
+
 				// envio de correo automatico de validacion de correo
 				$this->getLibrary('phpmailer/PHPMailer');
 				$this->getLibrary('phpmailer/SMTP');
-	
+
 				$mail = new PHPMailer;
-	
+
 				$mail->isSMTP();
 				$mail->SMTPDebug = false;
 				$mail->SMTPAuth = true; //Habilita uso de usuario y contraseña
@@ -284,14 +282,14 @@ class indexController extends Controller
 				$mail->Username = $conficorreo[0]['v_correo_salida']; //reportes@cafealtomayo.com.pe
 				$mail->Password = $conficorreo[0]['v_password']; //rpt4m2020
 				$mail->Port = $conficorreo[0]['i_puerto']; //25
-	
+
 				// $mail->From = ('reportes@cafealtomayo.com.pe');
 				$mail->From = ($conficorreo[0]['v_correo_salida']); //reportes@cafealtomayo.com.pe
 				$mail->FromName = $conficorreo[0]['v_nombre_salida']; // VERDUM PERÚ SAC
 				// $mail->addReplyTo('reportes@cafealtomayo.com.pe', 'noreplay verdum');
 				$mail->addAddress($registroconsulta[0]['v_correo'], ($registroconsulta[0]['v_nombres'] . ' ' . $registroconsulta[0]['v_apellidos']));
 				$mail->Subject = 'VALIDACIÓN DE CORREO ELECTRÓNICO';
-	
+
 				$mail->isHTML(true);
 				$mail->CharSet = "utf-8";
 				$mail->Subject = 'VALIDACIÓN DE CORREO ELECTRÓNICO';
@@ -313,12 +311,10 @@ class indexController extends Controller
 				} else {
 					$output = 1; // SE ENVIO CORRECTAMENTE
 				}
-
-			}else{
+			} else {
 				$output = 2; //NO SE ENCONTRO CORREO EN LA BASE DE DATOS
 			}
-
-		}else{
+		} else {
 			$output = 3; // NO HA INGRESADO CORREO
 		}
 
@@ -329,7 +325,6 @@ class indexController extends Controller
 				"dato" => $output,
 			)
 		);
-
 	}
 
 	public function nuevoregistro()
@@ -387,7 +382,7 @@ class indexController extends Controller
 
 			$result2 = $soap->ConfiguracionCorreo();
 			$conficorreo = json_decode($result2->ConfiguracionCorreoResult, true);
-	
+
 			// envio de correo automatico de validacion de correo
 			$this->getLibrary('phpmailer/PHPMailer');
 			$this->getLibrary('phpmailer/SMTP');
@@ -432,7 +427,7 @@ class indexController extends Controller
 				$output = 1; // SE ENVIO CORRECTAMENTE
 
 				//creamos su carpeta para el almacenamiento de sus archivos CV
-				$micarpeta = "public/doc/documentos/".$registroconsulta[0]['v_correo'];
+				$micarpeta = "public/doc/documentos/" . $registroconsulta[0]['v_correo'];
 				// $micarpeta = '/ruta/miserver/public_html/carpeta';
 				if (!file_exists($micarpeta)) {
 					mkdir($micarpeta, 0777, true);
@@ -562,6 +557,49 @@ class indexController extends Controller
 			$result2 = $soap->SubMenu($param2);
 			$submenu = json_decode($result2->SubMenuResult, true);
 
+			// menus en variables globales
+			$_SESSION['menus'] = $menu;
+			$_SESSION['submenus'] = $submenu;
+
+			$filasmenu = "";
+			$filassub = "";
+			$menu1 = "dashboard";
+			$submenu1 = "";
+			$active = "";
+
+			foreach ($menu as $m) {
+				foreach ($submenu as $sm) {
+					$active = $sm['v_link'] == $submenu1 ? " active" : "";
+					if ($sm['i_idmenu'] == $m['i_id']) {
+						$filassub .= "
+						<ul class='nav-treeview'>
+							<li class='nav-item " . $active . "'>
+								<a href='" . BASE_URL . $sm['v_link'] . "/index' class='" . $sm['v_link'] . " nav-link'>
+									<i data-feather='" . $sm['v_icono'] . "'></i>
+									<span>" . $sm['v_nombre'] . "</span>
+									" . $sm['v_span'] . "
+								</a>
+							</li>
+						</ul>";
+					}
+					$active = "";
+				}
+				// menu-open
+				$activem = $menu1 == $m['v_link'] && $m['i_submenu'] != 1 ? 'active ' : "";
+
+				$filasmenu .= "
+					<li class='" . $activem . "nav-item'>
+						<a href=" . BASE_URL . $m['v_link'] . " class='" . $m['v_link'] . " nav-link'>
+							<i data-feather='" . $m['v_icono'] . "'></i>
+							<span class='menu-title text-truncate'>" . str_replace("&otilde;", "ó", $m['v_nombre']) . "</span>
+						</a>
+						" . $filassub . "
+					</li>";
+				$filassub = "";
+			}
+
+			$_SESSION['menuinicial'] = $filasmenu;
+
 			$estado = 1; // logueo exitoso
 			$url = "/reclutamiento/" . $menu[0]['v_link'] . "/index";
 
@@ -578,7 +616,7 @@ class indexController extends Controller
 		} else if ($login[0]['v_existe'] == 0) {
 			$estado = 0; //clave incorrecta
 			$url = "";
-		} else if ($login[0]['v_existe'] == 3){
+		} else if ($login[0]['v_existe'] == 3) {
 			$estado = 3; //usuario inactivo
 			$url = "";
 		};

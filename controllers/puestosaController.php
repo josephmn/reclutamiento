@@ -12,6 +12,8 @@ class puestosaController extends Controller
 	{
 		if (isset($_SESSION['usuario'])) {
 
+			$this->_view->conctructor_menu('control','puestosa');
+
 			$this->_view->setCss_Specific(
 				array(
 					'dist/css/vendors.min',
