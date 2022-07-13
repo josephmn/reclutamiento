@@ -7,6 +7,7 @@
  */
 
 define('BASE_URL', 'https://verdum.com/reclutamiento/');
+define('BASE_URL2', 'https://verdum.com/reclutamiento/');
 define('BASE_ROOT',$_SERVER['DOCUMENT_ROOT'].'/reclutamiento/');
 // define('BASE_ROOT',$_SERVER['DOCUMENT_ROOT']);
 define('DEFAULT_CONTROLLER', 'index');

@@ -196,7 +196,10 @@ class indexController extends Controller
 				<br>
 				<br>
 				Saludo,<br>
-				VERDUM PERU SAC.";
+				VERDUM PERU SAC.
+				<br>
+				<br>
+				<img src='" . BASE_URL2 . "public/dist/img/footer_verdum2.png'>";
 
 				if (!$mail->send()) {
 					$output = 3; //	ERROR AL ENVIAR CORREO
@@ -303,8 +306,12 @@ class indexController extends Controller
 				Clave: <b>" . $registroconsulta[0]['i_clave_confirmacion'] . "</b>
 				<br>
 				<br>
-				Saludo,<br>
-				Verdum Perú S.A.C.";
+				Saludo,
+				<br>
+				VERDUM PERU SAC.
+				<br>
+				<br>
+				<img src='" . BASE_URL2 . "public/dist/img/footer_verdum2.png'>";
 
 				if (!$mail->send()) {
 					$output = 4; //	ERROR AL ENVIAR CORREO
@@ -418,8 +425,12 @@ class indexController extends Controller
 			Clave: <b>" . $registroconsulta[0]['i_clave_confirmacion'] . "</b>
 			<br>
 			<br>
-			Saludo,<br>
-			Verdum Perú S.A.C.";
+			Saludo,
+			<br>
+			VERDUM PERU SAC.
+			<br>
+			<br>
+			<img src='" . BASE_URL2 . "public/dist/img/footer_verdum2.png'>";
 
 			if (!$mail->send()) {
 				$output = 0; //	ERROR AL ENVIAR CORREO
