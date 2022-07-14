@@ -630,6 +630,9 @@ class indexController extends Controller
 		} else if ($login[0]['v_existe'] == 3) {
 			$estado = 3; //usuario inactivo
 			$url = "";
+		} else if ($login[0]['v_existe'] == 4) {
+			$estado = 4; //usuario no valida su correo
+			$url = "";
 		};
 
 		header('Content-type: application/json; charset=utf-8');

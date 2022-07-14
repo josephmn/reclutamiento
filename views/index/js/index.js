@@ -59,6 +59,17 @@ $("#btnlogin").on("click", function () {
               // showConfirmButton: false,
             });
             break;
+          case 4:
+            Swal.fire({
+              icon: "info",
+              title: "Aun no has validado tu correo",
+              text: "Favor de ir a la opción validar mi correo..!!",
+              timer: 5000,
+              timerProgressBar: true,
+              // showCancelButton: false,
+              // showConfirmButton: false,
+            });
+            break;
         }
       },
     });
