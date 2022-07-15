@@ -17,6 +17,6 @@ define('DEFAULT_LAYOUT', 'default');
 // define('DB_USER1', 'root');
 // define('DB_PASS1', '');
 // define('DB_NAME1', 'recursos_humanos');
-define('LAST_VERSION_SOURCE',strtotime('2022-06-27 22:58:00'));
+define('LAST_VERSION_SOURCE',strtotime('2022-07-14 16:43:00'));
 
 ?>
