@@ -572,6 +572,7 @@ class publicacionesbController extends Controller
 			$json = new Services_JSON();
 
 			$post = $_POST['post'];
+			$estado = $_POST['estado'];
 			$correlativo = $_POST['correlativo'];
 			$titulo = $_POST['titulo'];
 			$complemento = $_POST['complemento'];
@@ -619,10 +620,11 @@ class publicacionesbController extends Controller
 
 			$params = array(
 				'post' 				=> $post,
+				'estado'			=> $estado,
 				'correlativo' 		=> $correlativo,
 				'titulo' 			=> $titulo,
-				'complemento' 		=>  $complemento,
-				'descripcion' 		=>  $descripcion,
+				'complemento' 		=> $complemento,
+				'descripcion' 		=> $descripcion,
 				'pais' 				=> $pais,
 				'departamento' 		=> $departamento,
 				'provincia' 		=> $provincia,

@@ -509,6 +509,7 @@ $(function () {
 
   $("#btnregistrar").on("click", function () {
     let post = 2; //actualizar
+    let estado = $("#estado").val();
     let titulo = $("#titulo").val();
     let complemento = $("#complemento").val();
 
@@ -772,6 +773,7 @@ $(function () {
           url: "/reclutamiento/publicacionesb/mantenimiento_publicacionB",
           data: {
             post: post,
+            estado: estado,
             correlativo: correlativo,
             titulo: titulo,
             complemento: complemento,

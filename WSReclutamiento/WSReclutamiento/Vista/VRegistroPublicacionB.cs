@@ -12,6 +12,7 @@ namespace WSReclutamiento.view
     {
         public List<EMantenimiento> RegistroPublicacionB(
             Int32 post,
+            Int32 estado,
             String correlativo,
             String titulo,
             String complemento,
@@ -52,7 +53,7 @@ namespace WSReclutamiento.view
                     con.Open();
                     CRegistroPublicacionB oVRegistroPublicacionB = new CRegistroPublicacionB();
                     lCEMantenimiento = oVRegistroPublicacionB.RegistroPublicacionB(con,
-                       post, correlativo, titulo, complemento, descripcion, pais, departamento, provincia, distrito, jornada, desc_jornada,
+                       post, estado, correlativo, titulo, complemento, descripcion, pais, departamento, provincia, distrito, jornada, desc_jornada,
                        contrato, salario1, salario2, mostrar_salario, fecha, vacantes, experiencia, edad_min, edad_max, mostrar_edad, estudios, 
                        desc_estudios, rdviaje1, rdviaje2, rdresidencia1, rdresidencia2, rddiscapacidad1, rddiscapacidad2, puesto, user);
                 }

@@ -15,6 +15,7 @@ namespace WSReclutamiento.Controller
         public List<EMantenimiento> RegistroPublicacionB(
             SqlConnection con,
             Int32 post,
+            Int32 estado,
             String correlativo,
             String titulo,
             String complemento,
@@ -51,129 +52,38 @@ namespace WSReclutamiento.Controller
             SqlCommand cmd = new SqlCommand("ASP_MANT_PUBLICACIONB", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter par1 = cmd.Parameters.Add("@post", SqlDbType.Int);
-            par1.Direction = ParameterDirection.Input;
-            par1.Value = post;
-
-            SqlParameter par2 = cmd.Parameters.Add("@correlativo", SqlDbType.VarChar);
-            par2.Direction = ParameterDirection.Input;
-            par2.Value = correlativo;
-
-            SqlParameter par3 = cmd.Parameters.Add("@titulo", SqlDbType.VarChar);
-            par3.Direction = ParameterDirection.Input;
-            par3.Value = titulo;
-
-            SqlParameter par4 = cmd.Parameters.Add("@complemento", SqlDbType.VarChar);
-            par4.Direction = ParameterDirection.Input;
-            par4.Value = complemento;
-
-            SqlParameter par5 = cmd.Parameters.Add("@descripcion", SqlDbType.VarChar);
-            par5.Direction = ParameterDirection.Input;
-            par5.Value = descripcion;
-
-            SqlParameter par6 = cmd.Parameters.Add("@pais", SqlDbType.Int);
-            par6.Direction = ParameterDirection.Input;
-            par6.Value = pais;
-
-            SqlParameter par7 = cmd.Parameters.Add("@departamento", SqlDbType.Int);
-            par7.Direction = ParameterDirection.Input;
-            par7.Value = departamento;
-
-            SqlParameter par8 = cmd.Parameters.Add("@provincia", SqlDbType.Int);
-            par8.Direction = ParameterDirection.Input;
-            par8.Value = provincia;
-
-            SqlParameter par9 = cmd.Parameters.Add("@distrito", SqlDbType.Int);
-            par9.Direction = ParameterDirection.Input;
-            par9.Value = distrito;
-
-            SqlParameter par10 = cmd.Parameters.Add("@jornada", SqlDbType.Int);
-            par10.Direction = ParameterDirection.Input;
-            par10.Value = jornada;
-
-            SqlParameter par11 = cmd.Parameters.Add("@desc_jornada", SqlDbType.VarChar);
-            par11.Direction = ParameterDirection.Input;
-            par11.Value = desc_jornada;
-
-            SqlParameter par12 = cmd.Parameters.Add("@contrato", SqlDbType.Int);
-            par12.Direction = ParameterDirection.Input;
-            par12.Value = contrato;
-
-            SqlParameter par13 = cmd.Parameters.Add("@salario1", SqlDbType.VarChar);
-            par13.Direction = ParameterDirection.Input;
-            par13.Value = salario1;
-
-            SqlParameter par14 = cmd.Parameters.Add("@salario2", SqlDbType.VarChar);
-            par14.Direction = ParameterDirection.Input;
-            par14.Value = salario2;
-
-            SqlParameter par15 = cmd.Parameters.Add("@mostrar_salario", SqlDbType.VarChar);
-            par15.Direction = ParameterDirection.Input;
-            par15.Value = mostrar_salario;
-
-            SqlParameter par16 = cmd.Parameters.Add("@fecha", SqlDbType.VarChar);
-            par16.Direction = ParameterDirection.Input;
-            par16.Value = fecha;
-
-            SqlParameter par17 = cmd.Parameters.Add("@vacantes", SqlDbType.Int);
-            par17.Direction = ParameterDirection.Input;
-            par17.Value = vacantes;
-
-            SqlParameter par18 = cmd.Parameters.Add("@experiencia", SqlDbType.Int);
-            par18.Direction = ParameterDirection.Input;
-            par18.Value = experiencia;
-
-            SqlParameter par19 = cmd.Parameters.Add("@edad_min", SqlDbType.Int);
-            par19.Direction = ParameterDirection.Input;
-            par19.Value = edad_min;
-
-            SqlParameter par20 = cmd.Parameters.Add("@edad_max", SqlDbType.Int);
-            par20.Direction = ParameterDirection.Input;
-            par20.Value = edad_max;
-
-            SqlParameter par21 = cmd.Parameters.Add("@mostrar_edad", SqlDbType.VarChar);
-            par21.Direction = ParameterDirection.Input;
-            par21.Value = mostrar_edad;
-
-            SqlParameter par22 = cmd.Parameters.Add("@estudios", SqlDbType.Int);
-            par22.Direction = ParameterDirection.Input;
-            par22.Value = estudios;
-
-            SqlParameter par23 = cmd.Parameters.Add("@desc_estudios", SqlDbType.VarChar);
-            par23.Direction = ParameterDirection.Input;
-            par23.Value = desc_estudios;
-
-            SqlParameter par24 = cmd.Parameters.Add("@rdviaje1", SqlDbType.VarChar);
-            par24.Direction = ParameterDirection.Input;
-            par24.Value = rdviaje1;
-
-            SqlParameter par25 = cmd.Parameters.Add("@rdviaje2", SqlDbType.VarChar);
-            par25.Direction = ParameterDirection.Input;
-            par25.Value = rdviaje2;
-
-            SqlParameter par26 = cmd.Parameters.Add("@rdresidencia1", SqlDbType.VarChar);
-            par26.Direction = ParameterDirection.Input;
-            par26.Value = rdresidencia1;
-
-            SqlParameter par27 = cmd.Parameters.Add("@rdresidencia2", SqlDbType.VarChar);
-            par27.Direction = ParameterDirection.Input;
-            par27.Value = rdresidencia2;
-
-            SqlParameter par28 = cmd.Parameters.Add("@rddiscapacidad1", SqlDbType.VarChar);
-            par28.Direction = ParameterDirection.Input;
-            par28.Value = rddiscapacidad1;
-
-            SqlParameter par29 = cmd.Parameters.Add("@rddiscapacidad2", SqlDbType.VarChar);
-            par29.Direction = ParameterDirection.Input;
-            par29.Value = rddiscapacidad2;
-
-            SqlParameter par30 = cmd.Parameters.Add("@puesto", SqlDbType.Int);
-            par30.Direction = ParameterDirection.Input;
-            par30.Value = puesto;
-
-            SqlParameter par31 = cmd.Parameters.Add("@user", SqlDbType.Int);
-            par31.Direction = ParameterDirection.Input;
-            par31.Value = user;
+            cmd.Parameters.AddWithValue("@post", SqlDbType.Int).Value = post;
+            cmd.Parameters.AddWithValue("@estado", SqlDbType.Int).Value = estado;
+            cmd.Parameters.AddWithValue("@correlativo", SqlDbType.VarChar).Value = correlativo;
+            cmd.Parameters.AddWithValue("@titulo", SqlDbType.VarChar).Value = titulo;
+            cmd.Parameters.AddWithValue("@complemento", SqlDbType.VarChar).Value = complemento;
+            cmd.Parameters.AddWithValue("@descripcion", SqlDbType.VarChar).Value = descripcion;
+            cmd.Parameters.AddWithValue("@pais", SqlDbType.Int).Value = pais;
+            cmd.Parameters.AddWithValue("@departamento", SqlDbType.Int).Value = departamento;
+            cmd.Parameters.AddWithValue("@provincia", SqlDbType.Int).Value = provincia;
+            cmd.Parameters.AddWithValue("@distrito", SqlDbType.Int).Value = distrito;
+            cmd.Parameters.AddWithValue("@jornada", SqlDbType.Int).Value = jornada;
+            cmd.Parameters.AddWithValue("@desc_jornada", SqlDbType.VarChar).Value = desc_jornada;
+            cmd.Parameters.AddWithValue("@contrato", SqlDbType.Int).Value = contrato;
+            cmd.Parameters.AddWithValue("@salario1", SqlDbType.VarChar).Value = salario1;
+            cmd.Parameters.AddWithValue("@salario2", SqlDbType.VarChar).Value = salario2;
+            cmd.Parameters.AddWithValue("@mostrar_salario", SqlDbType.VarChar).Value = mostrar_salario;
+            cmd.Parameters.AddWithValue("@fecha", SqlDbType.VarChar).Value = fecha;
+            cmd.Parameters.AddWithValue("@vacantes", SqlDbType.Int).Value = vacantes;
+            cmd.Parameters.AddWithValue("@experiencia", SqlDbType.Int).Value = experiencia;
+            cmd.Parameters.AddWithValue("@edad_min", SqlDbType.Int).Value = edad_min;
+            cmd.Parameters.AddWithValue("@edad_max", SqlDbType.Int).Value = edad_max;
+            cmd.Parameters.AddWithValue("@mostrar_edad", SqlDbType.VarChar).Value = mostrar_edad;
+            cmd.Parameters.AddWithValue("@estudios", SqlDbType.Int).Value = estudios;
+            cmd.Parameters.AddWithValue("@desc_estudios", SqlDbType.VarChar).Value = desc_estudios;
+            cmd.Parameters.AddWithValue("@rdviaje1", SqlDbType.VarChar).Value = rdviaje1;
+            cmd.Parameters.AddWithValue("@rdviaje2", SqlDbType.VarChar).Value = rdviaje2;
+            cmd.Parameters.AddWithValue("@rdresidencia1", SqlDbType.VarChar).Value = rdresidencia1;
+            cmd.Parameters.AddWithValue("@rdresidencia2", SqlDbType.VarChar).Value = rdresidencia2;
+            cmd.Parameters.AddWithValue("@rddiscapacidad1", SqlDbType.VarChar).Value = rddiscapacidad1;
+            cmd.Parameters.AddWithValue("@rddiscapacidad2", SqlDbType.VarChar).Value = rddiscapacidad2;
+            cmd.Parameters.AddWithValue("@puesto", SqlDbType.Int).Value = puesto;
+            cmd.Parameters.AddWithValue("@user", SqlDbType.Int).Value = user;
 
             SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
 

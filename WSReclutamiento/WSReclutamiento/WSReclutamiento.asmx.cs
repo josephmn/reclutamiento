@@ -987,6 +987,7 @@ namespace WSReclutamiento
         [WebMethod]
         public string RegistroPublicacionB(
             Int32 post,
+            Int32 estado,
             String correlativo,
             String titulo,
             String complemento,
@@ -1020,7 +1021,7 @@ namespace WSReclutamiento
             )
         {
             List<EMantenimiento> lista = new List<EMantenimiento>();
-            lista = obERegistroPublicacionB.RegistroPublicacionB(post, correlativo, titulo, complemento, descripcion, pais, departamento, provincia, distrito, jornada, desc_jornada,
+            lista = obERegistroPublicacionB.RegistroPublicacionB(post, estado, correlativo, titulo, complemento, descripcion, pais, departamento, provincia, distrito, jornada, desc_jornada,
                        contrato, salario1, salario2, mostrar_salario, fecha, vacantes, experiencia, edad_min, edad_max, mostrar_edad, estudios,
                        desc_estudios, rdviaje1, rdviaje2, rdresidencia1, rdresidencia2, rddiscapacidad1, rddiscapacidad2, puesto, user);
             string json = JsonConvert.SerializeObject(lista);
