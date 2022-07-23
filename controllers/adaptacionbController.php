@@ -542,6 +542,7 @@ class adaptacionbController extends Controller
 
 			$params = array(
 				'post' => $post,
+				'estado' => 1, // para la publicacion siempre es en 1
 				'correlativo' => $correlativo,
 				'titulo' => $titulo,
 				'complemento' =>  $complemento,

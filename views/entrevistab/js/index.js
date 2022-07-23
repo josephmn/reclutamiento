@@ -2,7 +2,7 @@ $(function () {
   //cargar deshabilitado los input
   $("#codigo,#postulante").attr("readonly", true);
 
-  creardatatable("#example1", 10, 0); //tabla.- index
+  creardatatable("#example1", 10, 4); //tabla.- index
 });
 
 // crear tabla
